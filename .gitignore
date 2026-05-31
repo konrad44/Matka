@@ -77,3 +77,6 @@ desktop.ini
 node_modules/
 data/_*.json
 scrape/preview_popup.png
+
+# Netlify drag&drop bundle
+gdynia-mapa-netlify.zip

@@ -1,0 +1,11 @@
+# Statyczna strona — brak kroku build. Serwujemy zawartość repo.
+# (node_modules nie trafia do repo dzięki .gitignore, więc nie jest publikowane.)
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
