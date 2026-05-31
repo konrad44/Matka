@@ -59,7 +59,11 @@ const STUDIA_POLEDANCE = [
 ];
 
 // --- Oferty sprzedaży mieszkań > 80 m2 -------------------------------------
-// Dane przykładowe. `link` prowadzi do oferty lub do wyszukiwarki Otodom.
+// Dane przykładowe (scraping portali zablokowany — patrz README).
+// Możesz podać współrzędne (lat,lng) ALBO sam `adres` — wtedy aplikacja
+// zgeokoduje go przez Google Geocoding (ten sam klucz API).
+// Przykład bez współrzędnych:
+//   { tytul: "...", adres: "ul. Świętojańska 50", area: 95, cena: "...", link: "..." }
 // Mieszkania dalej niż 1,5 km od dowolnego przystanku SKM zostaną odfiltrowane.
 const OFERTY_MIESZKAN = [
   { tytul: "Mieszkanie 3-pok. 86 m², Śródmieście",  lat: 54.5160, lng: 18.5340, area: 86,  cena: "1 250 000 zł", link: "https://www.otodom.pl/pl/wyniki/sprzedaz/mieszkanie/pomorskie/gdynia/gdynia/gdynia?areaMin=80" },

@@ -92,6 +92,32 @@ function najblizszyPrzystanek(p) {
   return { dystans: min, nazwa: naz };
 }
 
+// --- Pozycja wpisu: gotowe lat/lng albo geokodowanie z adresu ---------------
+let geocoder;
+const cacheGeokod = {};
+function geokoduj(adres) {
+  return new Promise((resolve) => {
+    if (cacheGeokod[adres]) return resolve(cacheGeokod[adres]);
+    geocoder.geocode({ address: `${adres}, Gdynia, Polska`, region: "pl" }, (res, status) => {
+      if (status === "OK" && res[0]) {
+        const l = res[0].geometry.location;
+        const pos = { lat: l.lat(), lng: l.lng() };
+        cacheGeokod[adres] = pos;
+        resolve(pos);
+      } else {
+        console.warn(`Geokodowanie nieudane (${status}): ${adres}`);
+        resolve(null);
+      }
+    });
+  });
+}
+async function pozycja(wpis) {
+  if (typeof wpis.lat === "number" && typeof wpis.lng === "number")
+    return { lat: wpis.lat, lng: wpis.lng };
+  if (wpis.adres) return await geokoduj(wpis.adres);
+  return null;
+}
+
 // --- Budowa warstw ----------------------------------------------------------
 function dodajPrzystanki() {
   const okno = new google.maps.InfoWindow();
@@ -113,16 +139,18 @@ function dodajPrzystanki() {
   }
 }
 
-function dodajStudia() {
+async function dodajStudia() {
   const okno = new google.maps.InfoWindow();
   for (const s of STUDIA_POLEDANCE) {
+    const pos = await pozycja(s);
+    if (!pos) continue;
     const marker = new google.maps.Marker({
-      position: { lat: s.lat, lng: s.lng },
+      position: pos,
       map, icon: ikona("#e91e63"), title: s.nazwa, zIndex: 25,
     });
-    const kolo = new KoloBlednace(s, PROMIEN_STUDIO_M, "233,30,99");
+    const kolo = new KoloBlednace(pos, PROMIEN_STUDIO_M, "233,30,99");
     kolo.setMap(map);
-    const nz = najblizszyPrzystanek(s);
+    const nz = najblizszyPrzystanek(pos);
     marker.addListener("click", () => {
       okno.setContent(
         `<div class="iw"><strong>💃 ${s.nazwa}</strong><br>` +
@@ -136,16 +164,18 @@ function dodajStudia() {
   }
 }
 
-function dodajMieszkania() {
+async function dodajMieszkania() {
   const okno = new google.maps.InfoWindow();
   let pokazane = 0;
   for (const m of OFERTY_MIESZKAN) {
     if (m.area <= 80) continue;                       // warunek > 80 m²
-    const nz = najblizszyPrzystanek(m);
+    const pos = await pozycja(m);                      // współrzędne lub geokod z adresu
+    if (!pos) continue;
+    const nz = najblizszyPrzystanek(pos);
     if (nz.dystans > PROMIEN_SKM_M) continue;          // warunek <= 1,5 km od SKM
     pokazane++;
     const marker = new google.maps.Marker({
-      position: { lat: m.lat, lng: m.lng },
+      position: pos,
       map, icon: ikona("#43a047"), title: m.tytul, zIndex: 20,
     });
     marker.addListener("click", () => {
@@ -173,7 +203,7 @@ function ustawWarstwe(klucz, widoczna) {
 }
 
 // --- Inicjalizacja mapy -----------------------------------------------------
-function initMapa() {
+async function initMapa() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 54.5189, lng: 18.5306 }, // Gdynia Główna
     zoom: 13,
@@ -182,10 +212,11 @@ function initMapa() {
     fullscreenControl: true,
   });
 
+  geocoder = new google.maps.Geocoder();
   zdefiniujKoloBlednace();
   dodajPrzystanki();
-  dodajStudia();
-  const liczbaMieszkan = dodajMieszkania();
+  await dodajStudia();
+  const liczbaMieszkan = await dodajMieszkania();
 
   document.getElementById("cb-skm").addEventListener("change", (e) => ustawWarstwe("skm", e.target.checked));
   document.getElementById("cb-studia").addEventListener("change", (e) => ustawWarstwe("studia", e.target.checked));
