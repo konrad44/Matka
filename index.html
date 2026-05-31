@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gdynia — SKM, pole dance i mieszkania &gt;80&nbsp;m²</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+  :root{
+    --skm:#1565c0; --studio:#c2185b; --apt:#2e7d32; --bg:#0f1620;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  #map{position:absolute;inset:0;z-index:1}
+  /* Panel */
+  #panel{
+    position:absolute;top:12px;left:12px;z-index:1000;width:300px;max-width:calc(100vw - 24px);
+    background:rgba(15,22,32,.92);color:#e8eef5;border-radius:14px;padding:16px 18px;
+    box-shadow:0 8px 30px rgba(0,0,0,.45);backdrop-filter:blur(6px);
+    max-height:calc(100vh - 24px);overflow:auto;
+  }
+  #panel h1{font-size:17px;margin:0 0 4px;line-height:1.25}
+  #panel .sub{font-size:12px;color:#9fb2c6;margin:0 0 12px}
+  .legend{display:flex;flex-direction:column;gap:8px;margin:10px 0 4px}
+  .legend label{display:flex;align-items:center;gap:9px;font-size:13.5px;cursor:pointer;user-select:none}
+  .legend input{accent-color:#5b9bd5;width:16px;height:16px}
+  .dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;border:2px solid #fff3}
+  .dot.skm{background:var(--skm)} .dot.studio{background:var(--studio)} .dot.apt{background:var(--apt)}
+  .count{margin-left:auto;font-size:11px;color:#8aa0b6;background:#ffffff10;padding:1px 7px;border-radius:10px}
+  .note{font-size:11px;color:#8aa0b6;margin-top:12px;line-height:1.5;border-top:1px solid #ffffff14;padding-top:10px}
+  .note a{color:#7fb6ff}
+  /* Popups */
+  .leaflet-popup-content{margin:12px 14px;font-size:13px;line-height:1.5}
+  .pp-title{font-weight:700;font-size:14px;margin-bottom:4px}
+  .pp-title a{color:#0b5cab;text-decoration:none}
+  .pp-title a:hover{text-decoration:underline}
+  .pp-row{color:#33414f}
+  .pp-price{font-weight:700;color:#1b6b2a;font-size:15px;margin:4px 0}
+  .pp-tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:#eef3f8;color:#445;margin-top:6px}
+  .pp-btn{display:inline-block;margin-top:8px;background:#1565c0;color:#fff;padding:6px 12px;border-radius:8px;
+    text-decoration:none;font-weight:600;font-size:12.5px}
+  .pp-btn.studio{background:#c2185b}
+  .marker-num{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;
+    border:2px solid #fff;border-radius:50%;width:100%;height:100%;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+  @media(max-width:560px){#panel{width:calc(100vw - 24px)}}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div id="panel">
+  <h1>Gdynia: SKM · pole dance · mieszkania&nbsp;&gt;80&nbsp;m²</h1>
+  <p class="sub" id="sub">Ładowanie danych…</p>
+
+  <div class="legend">
+    <label><span class="dot skm"></span> Przystanki SKM
+      <input type="checkbox" id="t-skm" checked><span class="count" id="c-skm">–</span></label>
+    <label><span class="dot studio"></span> Studia pole dance
+      <input type="checkbox" id="t-studio" checked><span class="count" id="c-studio">–</span></label>
+    <label><span class="dot apt"></span> Mieszkania &gt;80&nbsp;m² (≤1,5&nbsp;km)
+      <input type="checkbox" id="t-apt" checked><span class="count" id="c-apt">–</span></label>
+  </div>
+  <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;margin-top:6px;cursor:pointer;color:#9fb2c6">
+    <input type="checkbox" id="t-rings" checked style="accent-color:#5b9bd5">
+    Pokaż blednące koła dystansu
+  </label>
+
+  <p class="note">
+    Koła wokół przystanków = promień <b>1,5&nbsp;km</b> (kryterium mieszkań), wokół studiów = <b>500&nbsp;m</b>.
+    Mieszkania pochodzą z aktualnych ofert <b>Otodom</b> (scrape Playwright), filtrowane do &gt;80&nbsp;m²
+    i ≤1,5&nbsp;km od przystanku SKM. Kliknij punkt, by zobaczyć szczegóły i link.
+    <span id="gen"></span>
+  </p>
+</div>
+
+<!-- ukryte definicje gradientów do blednących kół -->
+<svg width="0" height="0" style="position:absolute;left:-9999px" aria-hidden="true">
+  <defs>
+    <radialGradient id="gradSkm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#1565c0" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#1565c0" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#1565c0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gradStudio" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#c2185b" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#c2185b" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#c2185b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<style>
+  path.ring-skm{fill:url(#gradSkm);stroke:#1565c0;stroke-opacity:.35;stroke-width:1;stroke-dasharray:4 5}
+  path.ring-studio{fill:url(#gradStudio);stroke:#c2185b;stroke-opacity:.4;stroke-width:1;stroke-dasharray:3 4}
+</style>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="data/data.js"></script>
+<script>
+const D = window.MAP_DATA || {skm:[],studios:[],apartments:[]};
+const pln = n => n==null ? "—" : new Intl.NumberFormat("pl-PL").format(n)+" zł";
+const esc = s => (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+
+const map = L.map("map",{zoomControl:true}).setView([54.515,18.53],12);
+L.control.scale({imperial:false}).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+  maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// --- warstwy ---
+const layerSkm    = L.layerGroup();
+const layerStudio = L.layerGroup();
+const layerApt    = L.layerGroup();
+const layerRings  = L.layerGroup();   // blednące koła (osobno, do przełączania)
+
+function pin(color,label){
+  return L.divIcon({className:"",html:`<div class="marker-num" style="background:${color}">${label||""}</div>`,
+    iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
+}
+
+// SKM
+D.skm.forEach((s,i)=>{
+  L.circle([s.lat,s.lon],{radius:1500,className:"ring-skm",interactive:false}).addTo(layerRings);
+  L.marker([s.lat,s.lon],{icon:pin("#1565c0","S")})
+    .bindPopup(`<div class="pp-title">${esc(s.name)}</div>
+      <div class="pp-row">Przystanek SKM Trójmiasto</div>
+      <div class="pp-tag">promień 1,5 km</div>`)
+    .bindTooltip(esc(s.name),{direction:"top"})
+    .addTo(layerSkm);
+});
+
+// Studia
+D.studios.forEach(s=>{
+  L.circle([s.lat,s.lon],{radius:500,className:"ring-studio",interactive:false}).addTo(layerRings);
+  L.marker([s.lat,s.lon],{icon:pin("#c2185b","P")})
+    .bindPopup(`<div class="pp-title"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a></div>
+      <div class="pp-row">${esc(s.addr||"")}</div>
+      <div class="pp-row" style="margin-top:4px;color:#667">Najbliższy SKM: <b>${esc(s.nearestSkm)}</b> (~${s.nearestSkmDist} m)</div>
+      <a class="pp-btn studio" href="${esc(s.url)}" target="_blank" rel="noopener">Strona studia</a>`)
+    .bindTooltip(esc(s.name),{direction:"top"})
+    .addTo(layerStudio);
+});
+
+// Mieszkania
+D.apartments.forEach(a=>{
+  const rooms = a.rooms ? `${a.rooms} pok.` : "";
+  L.marker([a.lat,a.lon],{icon:pin("#2e7d32","M")})
+    .bindPopup(`<div class="pp-title"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)} ↗</a></div>
+      <div class="pp-price">${pln(a.price)}</div>
+      <div class="pp-row"><b>${a.area} m²</b>${rooms?" · "+rooms:""}${a.pricePerM2?" · "+pln(a.pricePerM2)+"/m²":""}</div>
+      <div class="pp-row">${esc(a.street||"")}${a.district?", "+esc(a.district):""}</div>
+      <div class="pp-row" style="margin-top:4px;color:#667">Najbliższy SKM: <b>${esc(a.nearestSkm)}</b> (~${a.nearestSkmDist} m)</div>
+      <div class="pp-tag">${a.isPrivate?"prywatne":"biuro / agencja"}</div>
+      <br><a class="pp-btn" href="${esc(a.url)}" target="_blank" rel="noopener">Zobacz ofertę na Otodom</a>`)
+    .bindTooltip(`${a.area} m² · ${pln(a.price)}`,{direction:"top"})
+    .addTo(layerApt);
+});
+
+// dodaj warstwy
+layerRings.addTo(map);
+layerSkm.addTo(map); layerStudio.addTo(map); layerApt.addTo(map);
+
+// kontrolka warstw (Leaflet) — równolegle do checkboxów w panelu
+L.control.layers(null,{
+  "Przystanki SKM":layerSkm,
+  "Studia pole dance":layerStudio,
+  "Mieszkania >80 m²":layerApt,
+  "Blednące koła dystansu":layerRings
+},{collapsed:true,position:"topright"}).addTo(map);
+
+// checkboxy w panelu
+function bind(id,layer){
+  const el=document.getElementById(id);
+  el.addEventListener("change",()=> el.checked ? layer.addTo(map) : map.removeLayer(layer));
+}
+bind("t-skm",layerSkm); bind("t-studio",layerStudio);
+bind("t-apt",layerApt); bind("t-rings",layerRings);
+
+// liczniki + dopasowanie widoku
+document.getElementById("c-skm").textContent=D.skm.length;
+document.getElementById("c-studio").textContent=D.studios.length;
+document.getElementById("c-apt").textContent=D.apartments.length;
+document.getElementById("sub").textContent=
+  `${D.skm.length} przystanków · ${D.studios.length} studiów · ${D.apartments.length} mieszkań`;
+if(D.generatedAt) document.getElementById("gen").innerHTML=
+  `<br>Dane pobrane: <b>${esc(D.generatedAt)}</b>.`;
+
+const all=[...D.skm,...D.studios,...D.apartments].filter(p=>p.lat);
+if(all.length) map.fitBounds(L.latLngBounds(all.map(p=>[p.lat,p.lon])).pad(0.12));
+</script>
+</body>
+</html>

@@ -72,3 +72,11 @@ desktop.ini
 
 # Claude Code (local settings only — settings.json is committed)
 .claude/settings.local.json
+
+# Project: build artifacts & intermediate scrape data
+node_modules/
+data/_*.json
+scrape/preview_popup.png
+
+# Netlify drag&drop bundle
+gdynia-mapa-netlify.zip
