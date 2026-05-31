@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gdynia — SKM, pole dance i mieszkania &gt; 80 m²</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Ekran wprowadzenia klucza Google Maps API -->
+  <div id="ekran-klucza">
+    <div class="karta-klucza">
+      <h1>Mapa Gdyni 🗺️</h1>
+      <p>Przystanki SKM, studia pole dance i oferty mieszkań &gt; 80 m² w zasięgu 1,5 km od SKM.</p>
+      <p class="info">
+        Mapa korzysta z Google Maps, więc potrzebny jest <b>klucz Google Maps JavaScript API</b>.
+        Wklej go poniżej (zostanie zapisany tylko w Twojej przeglądarce).
+      </p>
+      <input id="input-klucz" type="text" placeholder="Wklej klucz Google Maps API…" autocomplete="off">
+      <label class="zapamietaj"><input id="zapamietaj" type="checkbox" checked> Zapamiętaj klucz w tej przeglądarce</label>
+      <button id="btn-klucz">Pokaż mapę</button>
+      <p class="info-small">
+        Klucz wygenerujesz w
+        <a href="https://console.cloud.google.com/google/maps-apis" target="_blank" rel="noopener">Google Cloud Console</a>
+        (włącz „Maps JavaScript API”).
+      </p>
+    </div>
+  </div>
+
+  <!-- Panel warstw / legenda -->
+  <div id="panel" class="ukryty">
+    <h2>Warstwy</h2>
+    <label class="warstwa">
+      <input type="checkbox" id="cb-skm" checked>
+      <span class="kropka" style="background:#1e88e5"></span> Przystanki SKM
+    </label>
+    <label class="warstwa">
+      <input type="checkbox" id="cb-studia" checked>
+      <span class="kropka" style="background:#e91e63"></span> Studia pole dance
+    </label>
+    <label class="warstwa">
+      <input type="checkbox" id="cb-mieszkania" checked>
+      <span class="kropka" style="background:#43a047"></span> Mieszkania &gt; 80 m²
+    </label>
+
+    <hr>
+    <p class="meta">Mieszkania w zasięgu 1,5 km od SKM: <b id="licznik-mieszkan">0</b></p>
+    <a id="otodom-link" class="btn-oferty" href="#" target="_blank" rel="noopener">Aktualne oferty na Otodom ↗</a>
+    <p class="meta-small">
+      Koła wokół punktów pokazują dystans (SKM 1,5 km, studia 0,8 km) i bledną ku krawędzi.
+      Kliknij marker, by zobaczyć szczegóły i link.
+    </p>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+
+#map { position: absolute; inset: 0; z-index: 1; }
+
+/* --- Ekran klucza API --- */
+#ekran-klucza {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  padding: 20px;
+}
+.karta-klucza {
+  background: #fff; border-radius: 16px; padding: 32px;
+  max-width: 460px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.karta-klucza h1 { margin: 0 0 8px; font-size: 26px; }
+.karta-klucza p { margin: 8px 0; color: #333; line-height: 1.5; }
+.karta-klucza .info { font-size: 14px; color: #555; }
+.karta-klucza .info-small { font-size: 12px; color: #777; }
+#input-klucz {
+  width: 100%; padding: 12px 14px; margin-top: 12px;
+  border: 1px solid #ccc; border-radius: 8px; font-size: 14px;
+}
+.zapamietaj { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; margin: 12px 0; }
+#btn-klucz {
+  width: 100%; padding: 12px; border: 0; border-radius: 8px;
+  background: #2a5298; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer;
+}
+#btn-klucz:hover { background: #1e3c72; }
+
+/* --- Panel warstw --- */
+#panel {
+  position: absolute; top: 16px; left: 16px; z-index: 10;
+  background: rgba(255,255,255,.96); border-radius: 12px; padding: 16px 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.25); width: 270px; max-width: calc(100vw - 32px);
+}
+#panel.ukryty { display: none; }
+#panel h2 { margin: 0 0 12px; font-size: 16px; }
+.warstwa { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 14px; cursor: pointer; }
+.kropka { width: 14px; height: 14px; border-radius: 50%; display: inline-block; border: 2px solid #fff; box-shadow: 0 0 0 1px #ccc; }
+#panel hr { border: 0; border-top: 1px solid #eee; margin: 14px 0; }
+.meta { font-size: 13px; margin: 6px 0; }
+.meta-small { font-size: 11px; color: #777; line-height: 1.45; margin-top: 10px; }
+.btn-oferty {
+  display: block; text-align: center; text-decoration: none;
+  background: #43a047; color: #fff; padding: 9px; border-radius: 8px;
+  font-size: 13px; font-weight: 600; margin: 8px 0;
+}
+.btn-oferty:hover { background: #2e7d32; }
+
+/* --- InfoWindow --- */
+.iw { font-size: 13px; line-height: 1.5; max-width: 240px; }
+.iw a { color: #1e88e5; font-weight: 600; }
+
+@media (max-width: 520px) {
+  #panel { top: auto; bottom: 16px; left: 16px; right: 16px; width: auto; }
+}
