@@ -126,9 +126,9 @@ function dodajStudia() {
     marker.addListener("click", () => {
       okno.setContent(
         `<div class="iw"><strong>💃 ${s.nazwa}</strong><br>` +
-        `Studio pole dance<br>` +
+        (s.adres ? `${s.adres}<br>` : `Studio pole dance<br>`) +
         `Najbliższy SKM: ${nz.nazwa} (${(nz.dystans/1000).toFixed(2)} km)<br>` +
-        `<a href="${s.link}" target="_blank" rel="noopener">Otwórz link ↗</a></div>`
+        `<a href="${s.link}" target="_blank" rel="noopener">Strona studia ↗</a></div>`
       );
       okno.open(map, marker);
     });

@@ -26,12 +26,12 @@ python3 -m http.server 8000
 | Warstwa | Źródło | Status |
 |---|---|---|
 | Przystanki SKM | `js/data.js → PRZYSTANKI_SKM` | realne stacje SKM w Gdyni (współrzędne ~ dokładne) |
-| Studia pole dance | `js/data.js → STUDIA_POLEDANCE` | **przykładowe** — zweryfikuj adresy/linki |
-| Mieszkania | `js/data.js → OFERTY_MIESZKAN` | **przykładowe** — podmień na realne oferty |
+| Studia pole dance | `js/data.js → STUDIA_POLEDANCE` | **realne** — nazwy/adresy/strony zweryfikowane w sieci (maj 2026), współrzędne przybliżone z adresu |
+| Mieszkania | `js/data.js → OFERTY_MIESZKAN` | **przykładowe** — scraping ofert się nie udał (patrz niżej) |
 
 ### Dlaczego mieszkania są przykładowe?
 
-Aktualnych ofert nie da się pobierać na żywo z portali (Otodom/OLX blokują scraping, a dane szybko się dezaktualizują). Dlatego:
+Próba scrapowania aktualnych ofert się nie powiodła: Otodom, gethome, nieruchomosci-online, domiporta i ogłoszenia trojmiasto.pl zwracają **HTTP 403** dla automatycznych zapytań (ochrona anty-bot), a środowisko ma allowlistę sieci blokującą bezpośrednie `curl`/geokodery (Nominatim, Photon). Dostępne były tylko zagregowane statystyki, bez pojedynczych ofert ze współrzędnymi i linkami. Dlatego:
 
 - w `OFERTY_MIESZKAN` są edytowalne wpisy (wystarczy podać `lat`, `lng`, `area`, `cena`, `link`),
 - przycisk **„Aktualne oferty na Otodom ↗”** prowadzi do wyszukiwarki Otodom z filtrem Gdynia + powierzchnia ≥ 80 m².

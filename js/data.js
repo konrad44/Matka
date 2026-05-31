@@ -23,27 +23,38 @@ const PRZYSTANKI_SKM = [
 ];
 
 // --- Studia pole dance ------------------------------------------------------
-// UWAGA: współrzędne przybliżone do okolicy. Zweryfikuj adres/link przed użyciem.
+// REALNE studia z Gdyni (nazwy, adresy i strony zweryfikowane w sieci, maj 2026).
+// UWAGA: współrzędne wyliczone z adresu (geokoder był niedostępny) — przybliżone.
 const STUDIA_POLEDANCE = [
   {
-    nazwa: "Pole Dance Studio Gdynia (przykład – Śródmieście)",
-    lat: 54.5175, lng: 18.5375,
-    link: "https://www.google.com/maps/search/pole+dance+gdynia+%C5%9Br%C3%B3dmie%C5%9Bcie",
+    nazwa: "Flexora Studio Pole Dance",
+    adres: "ul. Helska 8, 81-020 Gdynia (Grabówek)",
+    lat: 54.5345, lng: 18.5410,
+    link: "https://www.flexorastudiopoledance.pl/",
   },
   {
-    nazwa: "Studio Pole / Aerial (przykład – Wzg. Św. Maksymiliana)",
-    lat: 54.5085, lng: 18.5360,
-    link: "https://www.google.com/maps/search/pole+dance+gdynia",
+    nazwa: "Lejdis Studio Gdynia (Pole Dance Academy)",
+    adres: "al. Zwycięstwa 197, 81-521 Gdynia (Redłowo)",
+    lat: 54.4905, lng: 18.5535,
+    link: "https://gdynia.lejdisstudio.com/",
   },
   {
-    nazwa: "Pole Fitness (przykład – Chylonia)",
-    lat: 54.5550, lng: 18.5100,
-    link: "https://www.google.com/maps/search/pole+fitness+gdynia+chylonia",
+    nazwa: "Skypole Dance Studio",
+    adres: "ul. Wielkopolska 395, 81-531 Gdynia (Mały Kack)",
+    lat: 54.4768, lng: 18.5384,
+    link: "https://skypole.pl/",
   },
   {
-    nazwa: "Studio Tańca na rurze (przykład – Redłowo)",
-    lat: 54.4975, lng: 18.5490,
-    link: "https://www.google.com/maps/search/pole+dance+gdynia+red%C5%82owo",
+    nazwa: "Lekko Studio Pole Dance",
+    adres: "ul. Wielkopolska 395, Gdynia (Mały Kack)",
+    lat: 54.4763, lng: 18.5378,
+    link: "https://www.facebook.com/p/Lekko-Studio-Pole-Dance-w-Gdyni-100063900489574/",
+  },
+  {
+    nazwa: "Panther Dance",
+    adres: "Gdynia Obłuże (rejon ul. Adm. Unruga)",
+    lat: 54.5585, lng: 18.5165,
+    link: "https://www.panther-dance.com/",
   },
 ];
 
