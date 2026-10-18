@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Katamaran + Zaćmienie 2027</title>
-<meta name="description" content="Scenariusze wyjazdu: tydzień katamaranem w Chorwacji (24–31.07.2027) + całkowite zaćmienie Słońca 2.08.2027. 9 osób z Trójmiasta.">
+<meta name="description" content="Wersja budżetowa: Lagoon 42 w Chorwacji (24–31.07.2027) + całkowite zaćmienie Słońca 2.08.2027 na Dżerbie. 9 osób z Trójmiasta.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f7f9; --surface:#ffffff; --surface2:#eef1f5; --text:#18202b; --muted:#5b6676; --line:#dde2ea;
+  --bg:#f6f7f9; --surface:#fff; --surface2:#eef1f5; --text:#18202b; --muted:#5b6676; --line:#dde2ea;
   --accent:#0b6bcb; --accent-soft:#e3f0fc; --good:#1a7f4b; --good-soft:#e2f4ea; --warn:#a36200; --warn-soft:#fdf1dc;
-  --bad:#b42318; --bad-soft:#fde5e2; --sun:#e8a400;
+  --bad:#b42318; --bad-soft:#fde5e2; --sun:#e8a400; --sea:#13a3b8;
   --radius:12px; --shadow:0 1px 2px rgba(16,24,40,.06),0 2px 8px rgba(16,24,40,.05);
 }
 @media (prefers-color-scheme: dark){
@@ -30,472 +30,258 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 a{color:var(--accent)}
-.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
-header.hero{background:linear-gradient(135deg,#0b3d6b,#0b6bcb 55%,#13a3b8);color:#fff;padding:40px 0 32px}
-.hero h1{margin:0 0 6px;font-size:clamp(24px,4vw,36px);line-height:1.15}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#0b3d6b,#0b6bcb 55%,#13a3b8);color:#fff;padding:36px 0 28px}
+.hero h1{margin:0 0 6px;font-size:clamp(24px,4vw,34px);line-height:1.15}
 .hero p{margin:0;opacity:.92;max-width:760px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:4px 10px;border-radius:999px;font-size:13px}
+.themebtn{float:right;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:4px 10px;cursor:pointer;font:inherit;font-size:13px}
 nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
 nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:6px;padding-bottom:6px}
 nav.toc a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:14px;padding:6px 10px;border-radius:8px}
 nav.toc a:hover{background:var(--surface2);color:var(--text)}
-section{padding:28px 0 8px}
-h2{font-size:22px;margin:0 0 6px}
-h3{font-size:17px;margin:0 0 6px}
-.lead{color:var(--muted);margin:0 0 16px;max-width:820px}
-.grid{display:grid;gap:14px}
+section{padding:26px 0 6px}
+h2{font-size:21px;margin:0 0 10px}
+h3{font-size:16px;margin:0 0 6px}
+.grid{display:grid;gap:12px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
-.kpi .v{font-size:22px;font-weight:700}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
 .kpi .l{color:var(--muted);font-size:13px}
-.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;margin-right:4px}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .b-good{background:var(--good-soft);color:var(--good)}
 .b-warn{background:var(--warn-soft);color:var(--warn)}
 .b-bad{background:var(--bad-soft);color:var(--bad)}
 .b-info{background:var(--accent-soft);color:var(--accent)}
-.alert{border-radius:var(--radius);padding:12px 14px;margin:12px 0;border:1px solid}
-.alert.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--text)}
+.alert{border-radius:var(--radius);padding:10px 14px;margin:12px 0;border:1px solid}
+.alert.bad{background:var(--bad-soft);border-color:var(--bad)}
 .alert.warn{background:var(--warn-soft);border-color:var(--warn)}
 .alert.info{background:var(--accent-soft);border-color:var(--accent)}
 .tbl{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:14px}
-th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
 th{background:var(--surface2);font-weight:600;white-space:nowrap}
 tr:last-child td{border-bottom:none}
-td.num{white-space:nowrap;font-variant-numeric:tabular-nums}
-.scen{display:none}
-.scen.active{display:block}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
-.tab{cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:8px 12px;border-radius:10px;font:inherit;font-size:14px;text-align:left}
-.tab small{display:block;color:var(--muted);font-size:12px}
-.tab.active{border-color:var(--accent);background:var(--accent-soft)}
+.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+td.r{text-align:right}
+tr.sum td{font-weight:700;background:var(--surface2)}
+tr.hl td{background:var(--good-soft)}
 .timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
-.timeline li{position:relative;padding:0 0 14px 18px}
+.timeline li{position:relative;padding:0 0 12px 18px}
 .timeline li::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline li.boat::before{background:var(--sea)}
 .timeline li.ecl::before{background:var(--sun);box-shadow:0 0 0 4px rgba(232,164,0,.25)}
-.timeline li.boat::before{background:#13a3b8}
 .timeline .d{font-weight:600}
 .timeline .t{color:var(--muted);font-size:14px}
-.cost{font-variant-numeric:tabular-nums}
-.cost td:last-child{text-align:right;white-space:nowrap}
-.cost tr.sum td{font-weight:700;background:var(--surface2)}
-.pc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:640px){.pc{grid-template-columns:1fr}}
-.pc ul{margin:4px 0 0;padding-left:18px}
-.bar{height:8px;border-radius:4px;background:var(--surface2);overflow:hidden}
+.bar{height:8px;border-radius:4px;background:var(--surface2);overflow:hidden;min-width:80px}
 .bar>span{display:block;height:100%;background:var(--sun)}
 .small{font-size:13px;color:var(--muted)}
 details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;margin:8px 0}
 summary{cursor:pointer;font-weight:600}
+ol.todo li{margin-bottom:4px}
 footer{color:var(--muted);font-size:13px;padding:24px 0 40px}
-.themebtn{float:right;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:4px 10px;cursor:pointer;font:inherit;font-size:13px}
-.check li{margin-bottom:4px}
 </style>
 </head>
 <body>
 <header class="hero">
   <div class="wrap">
     <button class="themebtn" id="themeBtn" type="button">◐ motyw</button>
-    <h1>Katamaran w Chorwacji + całkowite zaćmienie Słońca</h1>
-    <p>Lato 2027 · 9 osób z Trójmiasta (6 dorosłych, dzieci 15, 15 i 11 lat) + skipper na czas rejsu. Rejs sobota–sobota 24–31.07, zaćmienie w poniedziałek 2.08.2027.</p>
-    <div class="chips">
-      <span class="chip">✈ wylot GDN (alt. WAW)</span>
-      <span class="chip">⛵ katamaran z A/C, 5–6 kabin</span>
-      <span class="chip">🌑 2.08.2027</span>
-      <span class="chip">🏨 3–4★ / apartamenty</span>
-      <span class="chip">Research: 18.10.2026</span>
-    </div>
+    <h1>Lagoon 42 w Chorwacji + zaćmienie na Dżerbie</h1>
+    <p>Wersja budżetowa · lato 2027 · 9 osób z Trójmiasta (6 dorosłych, dzieci 15, 15 i 11 lat) + skipper na czas rejsu.</p>
   </div>
 </header>
 
 <nav class="toc"><div class="wrap">
-  <a href="#tldr">Rekomendacja</a>
-  <a href="#porownanie">Porównanie</a>
-  <a href="#scenariusze">Scenariusze</a>
-  <a href="#katamaran">Katamarany</a>
-  <a href="#porty">Porty i trasy</a>
-  <a href="#zacmienie">Zaćmienie</a>
+  <a href="#podsumowanie">Podsumowanie</a>
+  <a href="#plan">Plan</a>
+  <a href="#budzet">Budżet</a>
+  <a href="#jacht">Jacht</a>
   <a href="#loty">Loty</a>
-  <a href="#ryzyka">Ryzyka</a>
-  <a href="#todo">Co zrobić teraz</a>
+  <a href="#noclegi">Noclegi</a>
+  <a href="#warianty">Warianty</a>
+  <a href="#todo">Do zrobienia</a>
   <a href="#zrodla">Źródła</a>
 </div></nav>
 
 <main class="wrap">
 
-<section id="tldr">
-  <h2>Rekomendacja w skrócie</h2>
-  <p class="lead">Najlepszy kompromis wygoda/koszt/szansa na zaćmienie: <b>Scenariusz A – Split → Dżerba (Tunezja)</b>. Zaćmienie oglądacie z plaży hotelu, bez dojazdów, 4 min 43 s całkowitości. Jeśli zależy Wam na maksimum astronomicznym – <b>Scenariusz B (Sfax, 5 min 41 s)</b>. Egipt (C) to najdłuższa całkowitość i najprostszy powrót czarterem, ale wymaga przelotu przez Polskę.</p>
-  <div class="grid g3">
-    <div class="card kpi"><div class="v">10–12 dni</div><div class="l">pt 23.07 → śr 4.08.2027 (rejs + 1 dzień przed + 3 noce na zaćmienie)</div></div>
-    <div class="card kpi"><div class="v">~2 900–4 300 €/os.</div><div class="l">Scenariusz A, całość: loty, jacht ze skipperem, noclegi, auta, jedzenie (szacunek)</div></div>
-    <div class="card kpi"><div class="v">~26–39 tys. €</div><div class="l">łącznie dla 9 osób (A, Saona 47 vs Lagoon 50)</div></div>
+<section id="podsumowanie">
+  <h2>Podsumowanie</h2>
+  <div class="grid g4">
+    <div class="card kpi"><div class="v">~2 000–2 950 €</div><div class="l">na osobę za całość (~8,5–12,5 tys. zł)</div></div>
+    <div class="card kpi"><div class="v">~18–26,5 tys. €</div><div class="l">łącznie dla 9 osób</div></div>
+    <div class="card kpi"><div class="v">23.07 → 5.08</div><div class="l">14 dni, w tym 7 na jachcie i 5 nocy na Dżerbie</div></div>
+    <div class="card kpi"><div class="v">4 min 43 s</div><div class="l">całkowitego zaćmienia, oglądane z plaży</div></div>
   </div>
-  <div class="alert bad"><b>Arabia Saudyjska – obecnie odradzana.</b> Od ok. 11.10.2026 MSZ RP ma dla całego kraju poziom 4 („nie podróżuj”) po atakach Huti na lotniska (Rijad, Abha, Dammam). EASA wydała biuletyn strefy konfliktu dla FIR Jeddah. Zostawiam ją jako scenariusz warunkowy (E) – wracamy do tematu, jeśli ostrzeżenie spadnie.</div>
-  <div class="alert warn"><b>Czas działa przeciwko Wam.</b> Cenniki czarterów na 2027 są już w systemach, część katamaranów na 24–31.07 jest zarezerwowana. W Luksorze hotele 3–4★ są praktycznie wyprzedane, w Kadyksie ceny noclegów poszybowały. Rezerwujcie jacht i noclegi na zaćmienie w ciągu najbliższych tygodni – z bezpłatnym anulowaniem, gdzie się da.</div>
+  <div class="card" style="margin-top:12px">
+    <b>Plan w jednym zdaniu:</b> lot Ryanair Gdańsk → Zadar, potem bus do Splitu, tydzień na <b>Lagoon 42 z klimatyzacją i generatorem</b>, następnie lot Split → Lyon → Dżerba, 5 nocy w wynajętej willi, zaćmienie w poniedziałek 2.08 i powrót czarterem Rainbow Dżerba → Warszawa w czwartek 5.08.
+  </div>
+  <div class="alert info"><b>W porównaniu z poprzednią wersją (Saona 47 / Lagoon 50, hotele 4★) taniej o ~35–40%</b>, czyli o ok. 900–1 400 € na osobę. Ceną jest ciaśniejszy jacht (dwie małe kabiny dziobowe, tzw. forpiki), dłuższy powrót i willa zamiast hotelu.</div>
+  <div class="alert bad"><b>Arabia Saudyjska odpada:</b> MSZ ma tam poziom 4 („nie podróżuj”) po atakach na lotniska w X 2026. <b>Egipt w wersji budżetowej też się nie opłaca</b>: ze Splitu nie ma sensownego połączenia, a czartery wymuszają pobyt na 7 nocy.</div>
 </section>
 
-<section id="porownanie">
-  <h2>Porównanie scenariuszy</h2>
-  <p class="lead">Wszystkie scenariusze zakładają ten sam rejs: wylot GDN→Split w piątek 23.07, katamaran z Trogiru/Kašteli 24–31.07. Różnią się częścią „zaćmieniową”.</p>
+<section id="plan">
+  <h2>Plan dzień po dniu</h2>
+  <div class="card">
+  <ul class="timeline">
+    <li><div class="d">pt 23.07</div><div class="t">Ryanair Gdańsk 09:25 → Zadar 11:30, potem FlixBus Zadar → Split/Kaštela (~2 h, 10–20 €). Alternatywa: Wizz Air Gdańsk 12:40 → Split 14:55, wygodniej, ale zwykle drożej. Nocleg: 2 apartamenty w Kašteli.</div></li>
+    <li class="boat"><div class="d">sob 24.07</div><div class="t">Zakupy na tydzień. Wejście na jacht ok. 17:00 (ACI Split albo Rogoznica, zależnie od jachtu).</div></li>
+    <li class="boat"><div class="d">nd 25 – pt 30.07</div><div class="t">Šolta → Brač, Bol → Hvar i wyspy Pakleni → Vis, Komiža → Modra Grota → Šolta → Błękitna Laguna. Noce głównie na bojach, kotwicy i w małych portach (taniej niż mariny ACI). W piątek powrót do bazy.</div></li>
+    <li><div class="d">sob 31.07</div><div class="t">Zejście z jachtu do 9:00. Split → Lyon (easyJet lub Volotea), potem Lyon → Dżerba (Transavia, Nouvelair lub Tunisair), tego samego dnia albo w niedzielę. Alternatywy: przez Paryż-Orly albo przez Genewę.</div></li>
+    <li><div class="d">nd 1.08</div><div class="t">Willa w Midoun lub Houmt Souk, plaża. Rozdanie okularów do zaćmienia, sprawdzenie prognozy pyłu.</div></li>
+    <li class="ecl"><div class="d">pn 2.08 · zaćmienie</div><div class="t">Całkowite zaćmienie ok. <b>10:10–10:15</b> czasu lokalnego (4 min 43 s), Słońce wysoko nad morzem, ~30°C.</div></li>
+    <li><div class="d">wt 3 – śr 4.08</div><div class="t">Dżerba: plaża, Houmt Souk, synagoga El Ghriba, Guellala.</div></li>
+    <li><div class="d">czw 5.08</div><div class="t">Rainbow, sam przelot: Dżerba 17:35 → Warszawa 21:15 (rozkład 2026). Nocleg przy lotnisku albo pociąg do Gdańska rano (~3 h).</div></li>
+  </ul>
+  <p class="small">Szybszy, ale droższy powrót (+100–200 €/os.): w środę 4.08 Dżerba → Paryż-Orly, potem LOT Orly 20:20 → Gdańsk. Cała wycieczka skraca się wtedy o 1–2 dni.</p>
+  </div>
+</section>
+
+<section id="budzet">
+  <h2>Budżet (9 osób)</h2>
   <div class="tbl"><table>
-    <thead><tr><th>Scenariusz</th><th>Miejsce obserwacji</th><th>Całkowitość</th><th>Szansa na pogodę</th><th>Przeloty po rejsie</th><th>Powrót do domu</th><th>Koszt/os.*</th><th>Ocena</th></tr></thead>
+    <thead><tr><th>Pozycja</th><th class="r">Razem</th><th class="r">Na osobę</th></tr></thead>
     <tbody>
-      <tr><td><b>A</b> Dżerba</td><td>Plaża hotelu, Midoun/Aghir</td><td class="num">4:43</td><td>Bardzo wysoka</td><td>Split→Paryż→Dżerba, 8–10 h</td><td>śr 4.08 przez Orly + LOT do GDN</td><td class="num">2 900–4 300 €</td><td><span class="badge b-good">Polecany</span></td></tr>
-      <tr><td><b>B</b> Sfax</td><td>Plaża Chaffar / Mahrès</td><td class="num">5:41–5:44</td><td>Najwyższa w Tunezji (najmniej chmur i pyłu)</td><td>Split→Rzym→Tunis + 3 h autem</td><td>czw 5.08 czarter Enfidha→WAW lub śr przez Paryż</td><td class="num">2 800–4 100 €</td><td><span class="badge b-good">Dla zapalonych</span></td></tr>
-      <tr><td><b>C</b> Egipt</td><td>Marsa Alam – południe (Wadi el Gemal / Hamata)</td><td class="num">6:00–6:20</td><td>Najwyższa na całej trasie</td><td>Split→Warszawa, potem czarter do Marsa Alam</td><td>czarter bezpośredni do GDN/WAW</td><td class="num">3 500–4 400 €</td><td><span class="badge b-info">Mocna alternatywa</span></td></tr>
-      <tr><td><b>D</b> Hiszpania</td><td>Kadyks / Costa de la Luz</td><td class="num">2:56</td><td>Dobra (ryzyko mgły z Atlantyku)</td><td>Split→Barcelona→Jerez, 6–8 h</td><td>śr 4.08 Malaga→GDN bezpośrednio</td><td class="num">3 300–4 500 €</td><td><span class="badge b-warn">Awaryjny</span></td></tr>
-      <tr><td><b>E</b> Arabia Saud.</td><td>Wybrzeże na płd. od Dżuddy</td><td class="num">5:53–6:12</td><td>Dobra, ryzyko pyłu, 38°C + wilgoć</td><td>Split→Stambuł→Dżudda, 10–14 h</td><td>przez Stambuł + LOT do GDN</td><td class="num">3 800–4 800 €</td><td><span class="badge b-bad">MSZ poziom 4</span></td></tr>
+      <tr><td>Lot Gdańsk → Zadar/Split z bagażem + bus</td><td class="r num">850–1 900 €</td><td class="r num">95–210 €</td></tr>
+      <tr><td>Nocleg w Kašteli 23.07 (2 apartamenty)</td><td class="r num">240–400 €</td><td class="r num">25–45 €</td></tr>
+      <tr><td><b>Lagoon 42</b>: czarter, skipper, pakiet końcowy, paliwo, mariny i boje, ubezpieczenie kaucji</td><td class="r num">10 700–14 000 €</td><td class="r num">1 190–1 550 €</td></tr>
+      <tr><td>Prowiant na jacht (10 osób, w tym skipper)</td><td class="r num">1 400–2 100 €</td><td class="r num">155–235 €</td></tr>
+      <tr><td>Split → Lyon → Dżerba</td><td class="r num">1 600–3 000 €</td><td class="r num">180–330 €</td></tr>
+      <tr><td>Willa na Dżerbie, 5 nocy (z dopłatą za zaćmienie)</td><td class="r num">750–2 000 €</td><td class="r num">85–220 €</td></tr>
+      <tr><td>Auta lub minibus i transfery w Tunezji</td><td class="r num">400–700 €</td><td class="r num">45–80 €</td></tr>
+      <tr><td>Rainbow Dżerba → Warszawa + pociąg do Gdańska</td><td class="r num">1 900–2 400 €</td><td class="r num">210–265 €</td></tr>
+      <tr class="sum"><td>Razem</td><td class="r num">~17 800–26 500 €</td><td class="r num">~2 000–2 950 €</td></tr>
     </tbody>
   </table></div>
-  <p class="small">* Szacunek na osobę przy 9 osobach, łącznie z rejsem (Saona 47 – dolna granica, Lagoon 50 – górna), skipperem, marinami, paliwem, prowiantem, wszystkimi lotami, noclegami i autami. Bez restauracji i atrakcji. Kurs ~4,25 zł/€.</p>
+  <p class="small">Budżet nie obejmuje restauracji (2–3 kolacje w Chorwacji to ~700–1 500 € dla grupy), wejściówek ani zwrotnej kaucji za jacht (2 500–4 000 €). Kurs ~4,25 zł/€. Ceny 2027 są częściowo szacowane na podstawie 2026.</p>
 </section>
 
-<section id="scenariusze">
-  <h2>Scenariusze dzień po dniu</h2>
-  <div class="tabs" role="tablist">
-    <button class="tab active" data-s="A">A · Dżerba<small>polecany</small></button>
-    <button class="tab" data-s="B">B · Sfax<small>max całkowitości w Tunezji</small></button>
-    <button class="tab" data-s="C">C · Egipt Marsa Alam<small>najdłuższe, czartery do PL</small></button>
-    <button class="tab" data-s="D">D · Hiszpania<small>awaryjny</small></button>
-    <button class="tab" data-s="E">E · Arabia Saudyjska<small>warunkowy</small></button>
-  </div>
-
-  <!-- wspólna część rejsu -->
-  <details open>
-    <summary>Wspólny początek wszystkich scenariuszy: Gdańsk → Split → katamaran (pt 23.07 – sob 31.07)</summary>
-    <ul class="timeline" style="margin-top:12px">
-      <li><div class="d">pt 23.07</div><div class="t">Wizz Air GDN 12:40 → Split 14:55 (rozkład 2026: pon i pt). Taxi/van 15 min do Trogiru. Nocleg: 2 apartamenty w Trogirze/Seget (~250–400 € za noc łącznie). Wieczór na starówce Trogiru.</div></li>
-      <li class="boat"><div class="d">sob 24.07</div><div class="t">Rano zakupy (prowiant ~1 200–1 800 € na tydzień dla 10 osób – supermarket lub dostawa na jacht). Check-in na katamaran od ~17:00 (płatny early check-in od 13:00: ~140–300 €). Krótki przelot na Šoltę/Milną.</div></li>
-      <li class="boat"><div class="d">nd 25.07 – pt 30.07</div><div class="t">Pętla Brač (Bol, Zlatni rat) → Hvar + Pakleni (Palmižana) → Vis (Komiža) → Biševo, Modra Grota rano → Stiniva → Šolta (Maslinica) → Błękitna Laguna. W piątek tankowanie i powrót do bazy do 17–19, noc na jachcie w marinie.</div></li>
-      <li class="boat"><div class="d">sob 31.07</div><div class="t">Check-out 8:00–9:00. Skipper zostaje. 10–15 min na lotnisko SPU. Dalej – zależnie od scenariusza.</div></li>
-    </ul>
-    <p class="small">Dlaczego Split/Trogir, a nie Dubrownik: lotnisko 10–15 min od marin, bezpośredni lot z Gdańska i najwięcej połączeń dalej (Paryż, Rzym, Barcelona, Stambuł, Frankfurt, Monachium, Wiedeń). Dubrownik (ACI Komolac, 30–45 min od lotniska) ma piękniejszą trasę (Elafity, Mljet), ale gorsze połączenia na zaćmienie.</p>
-  </details>
-
-  <div class="scen active" id="scen-A">
-    <div class="card">
-      <h3>A · Dżerba – zaćmienie z hotelowej plaży <span class="badge b-good">polecany</span></h3>
-      <ul class="timeline" style="margin-top:12px">
-        <li><div class="d">sob 31.07</div><div class="t">Split → Paryż-Orly (Transavia/easyJet, ~2 h 15 min) → Dżerba (Transavia/Tunisair, ~2 h 50 min). Razem ~8–10 h z przesiadką. Najlepiej na jednym bilecie lub z przesiadką ≥3 h. Tunezja ma UTC+1 – zyskujecie godzinę. Transfer DJE → Midoun 20–30 min (2 auta lub minibus z kierowcą).</div></li>
-        <li><div class="d">nd 1.08</div><div class="t">Plaża, odpoczynek. Sprawdzenie prognozy pyłu (Meteoblue, Barcelona Dust Center) i miejsca obserwacji. Rozdanie okularów ISO 12312-2.</div></li>
-        <li class="ecl"><div class="d">pn 2.08 · zaćmienie</div><div class="t">Faza częściowa ~08:55–11:31, <b>całkowitość ~10:10–10:15 (4 min 43 s)</b>, Słońce ~57° nad morzem na wschodzie. O 10:00 jest ~30°C – cień i woda dla dzieci. Po południu Houmt Souk albo aquapark.</div></li>
-        <li><div class="d">wt 3.08</div><div class="t">Dzień na Dżerbie: synagoga El Ghriba, Guellala, plaża. Ewentualnie wycieczka na Ksar Ghilane albo do Matmaty (filmowy dom Luke'a Skywalkera).</div></li>
-        <li><div class="d">śr 4.08</div><div class="t">Dżerba → Paryż-Orly (Transavia/Tunisair), potem <b>LOT ORY 20:20 → GDN ~22:35</b> (nowa trasa od 5.04.2027: pon, śr, pt, nd). Alternatywa: Discover Airlines DJE→Frankfurt w środę rano + Lufthansa FRA→GDN.</div></li>
-      </ul>
-      <div class="pc">
-        <div><span class="badge b-good">Plusy</span><ul><li>W dniu zaćmienia zero logistyki – leżak i okulary</li><li>Największa baza 3–4★ i apartamentów w pasie całkowitości</li><li>Plaża, morze 29°C, aquaparki dla dzieci</li><li>Powrót do Gdańska w środę jednym biletem z przesiadką</li></ul></div>
-        <div><span class="badge b-warn">Minusy</span><ul><li>Całkowitość ~1 min krótsza niż w Sfaksie</li><li>Split→Dżerba tylko z przesiadką (8–10 h)</li><li>Popyt rośnie (easyJet: +189% rezerwacji do Tunezji)</li></ul></div>
-      </div>
-      <h3 style="margin-top:14px">Noclegi</h3>
-      <p>Strefa turystyczna Midoun/Aghir, 3–4★ z pokojami rodzinnymi lub aparthotel: np. Djerba Castille, Vincci Dar Midoun, Djerba Resort, Iberostar Mehari, Club Palm Azur, Dar El Manara (apartamenty). Dla 9 osób 3 pokoje rodzinne albo 2 apartamenty. Średnia w Midoun w sierpniu: ~180–280 € za pokój/noc (przed efektem zaćmienia). Rezerwujcie 4 noce (31.07–4.08) z bezpłatnym anulowaniem.</p>
-      <h3>Kosztorys A (9 osób)</h3>
-      <div class="tbl"><table class="cost">
-        <tr><td>Loty GDN→Split (z bagażem)</td><td>9 × 120–250 € = 1 100–2 300 €</td></tr>
-        <tr><td>Nocleg Trogir 23.07</td><td>250–400 €</td></tr>
-        <tr><td>Katamaran z dodatkami (skipper, mariny, paliwo, sprzątanie, waiver)</td><td>16 000–21 000 €</td></tr>
-        <tr><td>Prowiant + jedzenie skippera</td><td>1 400–2 000 €</td></tr>
-        <tr><td>Split→Paryż→Dżerba</td><td>9 × 260–520 € = 2 300–4 700 €</td></tr>
-        <tr><td>Hotel Dżerba, 4 noce, 3 pokoje</td><td>2 200–3 600 €</td></tr>
-        <tr><td>Transfery, auta, taxi w Chorwacji i Tunezji</td><td>400–700 €</td></tr>
-        <tr><td>Dżerba→Orly→Gdańsk</td><td>9 × 260–450 € = 2 300–4 100 €</td></tr>
-        <tr class="sum"><td>Razem</td><td>~26 000–39 000 € · ~2 900–4 300 €/os.</td></tr>
-      </table></div>
-    </div>
-  </div>
-
-  <div class="scen" id="scen-B">
-    <div class="card">
-      <h3>B · Sfax – najdłuższa całkowitość w Tunezji <span class="badge b-good">dla zapalonych</span></h3>
-      <ul class="timeline" style="margin-top:12px">
-        <li><div class="d">sob 31.07</div><div class="t">Split → Rzym-FCO (Croatia Airlines/Ryanair) → Tunis (ITA, ~36 lotów tyg., m.in. 17:00 i 22:00). Nocleg w Tunisie albo od razu lot krajowy Tunisair Express do Sfaksu.</div></li>
-        <li><div class="d">nd 1.08</div><div class="t">Tunis → Sfax: A1 ~270 km, ~3 h (bus z kierowcą lub 2 auta). Po drodze <b>amfiteatr w El Jem</b>. Zakwaterowanie: Radisson Sfax / Les Oliviers Palace albo apartamenty przy plaży w Chaffar/Mahrès.</div></li>
-        <li class="ecl"><div class="d">pn 2.08 · zaćmienie</div><div class="t">Wyjazd przed 8:00 na plażę Chaffar (26 km od Sfaksu). <b>Całkowitość ~10:09–10:15 (5 min 43 s)</b>. Region ma według Jaya Andersona (eclipsophile) najmniejsze zachmurzenie i zapylenie na zachodnim odcinku pasa.</div></li>
-        <li><div class="d">wt 3.08 – śr 4.08</div><div class="t">Kerkennah (prom 1 h 15 min) lub przejazd do Mahdii/Monastiru na plażę. Hotel w Mahdii.</div></li>
-        <li><div class="d">czw 5.08</div><div class="t"><b>Czarter Rainbow Enfidha → Warszawa</b> (pon i czw, seat-only ~680–900 zł), potem pociąg/LOT do Gdańska. Alternatywa: śr 4.08 Tunis → Paryż → LOT do Gdańska.</div></li>
-      </ul>
-      <div class="pc">
-        <div><span class="badge b-good">Plusy</span><ul><li>+1 minuta całkowitości względem Dżerby</li><li>Najlepsza klimatologia w Tunezji</li><li>Tani powrót czarterem</li><li>El Jem po drodze</li></ul></div>
-        <div><span class="badge b-warn">Minusy</span><ul><li>Sfax to miasto przemysłowe, nie kurort</li><li>Więcej jazdy (~3 h + dojazd na plażę)</li><li>Powrót dzień później (czwartek) albo drożej w środę</li><li>Na 9 osób trudno o vana – raczej 2 auta lub bus z kierowcą</li></ul></div>
-      </div>
-      <h3 style="margin-top:14px">Kosztorys B – różnice względem A</h3>
-      <p>Lot Split→Tunis przez Rzym jest tańszy (~200–400 €/os.). Hotel w Sfaksie lub apartamenty są tańsze od Dżerby. Dochodzi bus z kierowcą na 3–4 dni (~600–1 000 €). Czarter powrotny jest tani (~160–210 €/os.). <b>Razem ~2 800–4 100 €/os.</b> Wymaga dodatkowej nocy.</p>
-      <p class="small">Wariant mieszany: nocleg w resorcie w Mahdii (całkowitość 2:49) i w dniu zaćmienia wyjazd ~6:30 na plażę Chaffar (1,5–2 h). Wygodniejszy hotel, ale ryzyko korków.</p>
-    </div>
-  </div>
-
-  <div class="scen" id="scen-C">
-    <div class="card">
-      <h3>C · Egipt, południowe wybrzeże Marsa Alam <span class="badge b-info">mocna alternatywa</span></h3>
-      <ul class="timeline" style="margin-top:12px">
-        <li><div class="d">sob 31.07</div><div class="t">Split → Warszawa (LOT, ~2 h; lub Split → Gdańsk, jeśli przewoźnik lata w sobotę). Nocleg w domu albo przy lotnisku.</div></li>
-        <li><div class="d">nd 1.08</div><div class="t">Czarter seat-only WAW/GDN → Marsa Alam (RMF) – Itaka, Rainbow, Enter Air (latem latają często; w 2026 ~1 900–2 000 zł w obie strony). Resort all-inclusive 4★.</div></li>
-        <li class="ecl"><div class="d">pn 2.08 · zaćmienie</div><div class="t">Najlepiej resort w rejonie <b>Wadi el Gemal / Hamata (~6:00–6:20)</b>. Sam Marsa Alam ~5:30, Port Ghalib ~4:30. <b>Całkowitość ~13:10–13:16 czasu lokalnego</b>. Słońce prawie w zenicie (~82°), ~36°C, bryza od morza.</div></li>
-        <li><div class="d">wt 3.08 – śr 4.08</div><div class="t">Rafa koralowa, snorkeling (Abu Dabbab – żółwie, diugonie). Powrót czarterem do GDN/WAW – <b>dni powrotu do potwierdzenia</b>.</div></li>
-      </ul>
-      <div class="pc">
-        <div><span class="badge b-good">Plusy</span><ul><li>Najdłuższa całkowitość (do 6:20) i praktycznie zero chmur</li><li>Resorty all-inclusive w normalnych cenach (~120 €/noc za 4★)</li><li>Bezpośrednie czartery z/do Polski, wiza 30 USD</li><li>Świetne dla dzieci – rafa, snorkeling</li></ul></div>
-        <div><span class="badge b-warn">Minusy</span><ul><li>Powrót do Polski między rejsem a Egiptem (2 dodatkowe przeloty)</li><li>Czartery mają stałe rotacje – trzeba trafić w dni</li><li>„Marsa Alam” to 150 km wybrzeża – koniecznie sprawdzić współrzędne hotelu</li><li>Hurghada i Safaga są POZA pasem</li></ul></div>
-      </div>
-      <p class="small">Luksor (6:22) – hotele 3–4★ są praktycznie wyprzedane, upał 42°C. Ewentualnie wycieczka z resortu (~4 h w jedną stronę) – nie polecam z dziećmi.</p>
-      <p><b>Szacunek C: ~3 500–4 400 €/os.</b> (dodatkowy lot Split→WAW ~150–250 €, czarter ~450–550 €, resort AI 3 noce ~350–500 €/os.).</p>
-    </div>
-  </div>
-
-  <div class="scen" id="scen-D">
-    <div class="card">
-      <h3>D · Hiszpania, Kadyks <span class="badge b-warn">awaryjny</span></h3>
-      <ul class="timeline" style="margin-top:12px">
-        <li><div class="d">sob 31.07</div><div class="t">Vueling Split 08:45 → Barcelona (2 h 15 min) → Jerez/Sewilla (~1 h 30 min). Razem 6–8 h. Wynajem vana 9-osobowego (w Hiszpanii łatwo dostępny).</div></li>
-        <li class="ecl"><div class="d">pn 2.08 · zaćmienie</div><div class="t">Kadyks / Conil / Barbate: <b>całkowitość ~10:45–10:48 (2:56)</b>, Słońce nisko (~30°) – trzeba odkrytego widoku na wschód. Tarifa ~4:30, ale tam będą tłumy.</div></li>
-        <li><div class="d">śr 4.08</div><div class="t">Kadyks → Malaga (~3 h autem), Wizz Air Malaga → Gdańsk (pon, śr, pt) albo Ryanair.</div></li>
-      </ul>
-      <div class="pc">
-        <div><span class="badge b-good">Plusy</span><ul><li>Najkrótsze przeloty i bezpośredni powrót do GDN</li><li>UE, euro, łatwe auta</li></ul></div>
-        <div><span class="badge b-bad">Minusy</span><ul><li>Najkrótsza całkowitość, Słońce nisko</li><li>Ceny noclegów ekstremalne (pojedyncze oferty po kilkanaście–kilkadziesiąt tys. € za noc, hotele w Kadyksie wstrzymały sprzedaż)</li><li>Ryzyko porannej mgły od Atlantyku i ogromne tłumy</li></ul></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="scen" id="scen-E">
-    <div class="card">
-      <h3>E · Arabia Saudyjska, Dżudda <span class="badge b-bad">warunkowy – MSZ poziom 4</span></h3>
-      <div class="alert bad">Stan na 18.10.2026: MSZ odradza wszelkie podróże. W październiku 2026 Huti zaatakowali lotniska (Rijad: 12–13 ofiar, Abha: 2 zabitych, 28 rannych) i zagrozili liniom lotniczym. Wiele linii zawiesiło loty. Wizz Air odwołał też Dubaj i Abu Zabi do 27.03.2027. Rozważać tylko, jeśli sytuacja się uspokoi.</div>
-      <ul class="timeline">
-        <li><div class="d">sob 31.07</div><div class="t">Croatia Airlines Split → Stambuł wieczorem, Turkish IST → Dżudda (~3 h 50 min). Razem 10–14 h, przesiadka nocna. E-wiza ~535 SAR/os. (także dzieci).</div></li>
-        <li class="ecl"><div class="d">pn 2.08 · zaćmienie</div><div class="t">Baza w południowej Dżuddzie. Obserwacja na wybrzeżu Ash Shuaibah (~70 km na płd., 1–1,5 h jazdy) – <b>~6:12</b>, ok. 13:28 czasu lokalnego. Samo centrum Dżuddy ~5:50. 2 SUV-y (Tahoe/Yukon). Upał ~38°C i duża wilgotność.</div></li>
-        <li><div class="d">śr 4.08</div><div class="t">Dżudda → Stambuł (Turkish) → Gdańsk (LOT: pon, śr, pt, nd).</div></li>
-      </ul>
-      <p class="small">Unikać: Mekka (zakaz wjazdu dla niemuzułmanów), Abha, Khamis Mushait i Taif (popołudniowe burze w górach, cele ataków; Taif ma tylko ~3:50).</p>
-    </div>
-  </div>
-</section>
-
-<section id="katamaran">
-  <h2>Katamarany dla 9 osób + skippera</h2>
-  <p class="lead">Potrzebujecie <b>min. 5 kabin dla gości + osobnej kabiny skippera</b> (oznaczenie „5+1” lub „6+1”). Bez niej skipper zajmuje kabinę gości. A/C i generator są w tej klasie standardem, ale przed podpisaniem umowy upewnijcie się, że A/C działa w kabinach i czy generator ma limit godzin.</p>
+<section id="jacht">
+  <h2>Jacht: Lagoon 42 (układ 4+2)</h2>
+  <p><b>10 osób się mieści:</b> 4 kabiny dwuosobowe z łazienkami (3 pary dorosłych + dwoje 15-latków) oraz 2 forpiki, czyli małe kabiny dziobowe z wejściem z pokładu (11-latek i skipper). Unikać wersji „3+2”, bo ma za mało kabin.</p>
   <div class="tbl"><table>
-    <thead><tr><th>#</th><th>Model</th><th>Kabiny</th><th>A/C + gen.</th><th>Cena/tydz. lipiec–sierpień 2027 (sam jacht)</th><th>Bazy</th><th>Komentarz</th></tr></thead>
+    <thead><tr><th>Jacht</th><th>Rok</th><th>Baza</th><th>Klim. / gen.</th><th class="r">24–31.07.2027</th><th>7–14.08</th><th>Opłaty obow.</th><th>Skipper</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td><b>Fountaine Pajot Saona 47 Quintet</b> (2017–20)</td><td>5 × dwuosobowa + kabina skippera, 5 łazienek</td><td>✔</td><td class="num">~11 100 € <span class="small">(12 989 USD)</span></td><td>Trogir, Rogoznica, Biograd</td><td><span class="badge b-good">Najlepsza cena/wygoda</span> Każda kabina ma łazienkę. „Sunny Wave” (Marina Trogir) była wolna 24–31.07 i 7–14.08</td></tr>
-      <tr><td>2</td><td><b>Lagoon 50</b> (2018–23)</td><td>6 + kabina skippera, 12 miejsc</td><td>✔ std.</td><td class="num">13 000–15 300 €</td><td>Kaštela, Seget, Dubrownik</td><td><span class="badge b-good">Najwygodniejszy w rozsądnej cenie</span> Jedna kabina zostaje wolna. Najwięcej egzemplarzy w Kašteli</td></tr>
-      <tr><td>3</td><td><b>Bali 4.8</b> (2020–24)</td><td>6 (lub 6+1), 6 łazienek</td><td>✔</td><td class="num">13 300–13 900 €</td><td>Kaštela, Trogir</td><td>Ogromny salon połączony z kokpitem. „Baša” jest już zajęta – szukać innych</td></tr>
-      <tr><td>4</td><td>Lagoon 46 (2021–26)</td><td>4 + 2 kabiny dziobowe, 4 WC</td><td>często</td><td class="num">12 350–14 590 €</td><td>Seget, Trogir</td><td><span class="badge b-warn">Ciasno</span> Kabiny dziobowe są małe i wchodzi się do nich z pokładu</td></tr>
-      <tr><td>5</td><td>Lagoon 51 (2023–26)</td><td>6 + 2</td><td>✔</td><td class="num">17 800–21 750 € + 13% VAT</td><td>Kaštela, Trogir</td><td>Klasa premium, często tylko z załogą</td></tr>
-      <tr><td>6</td><td>Bali 5.4 / Excess 15 / Leopard 50</td><td>6–7</td><td>✔</td><td class="num">19 000–22 000 €</td><td>Kaštela, Seget, Agana</td><td>Za drogie na ten budżet</td></tr>
+      <tr class="hl"><td><a href="https://12knots.com/de/yacht-charter/lagoon-42-4-2-cab-adventure-64129/"><b>„Adventure”</b></a> <span class="badge b-good">nr 1</span></td><td>2022</td><td>ACI Split</td><td>✔ / ✔</td><td class="r num">~7 520 €</td><td>zajęty</td><td class="num">~650 €</td><td class="num">~220 €/dzień</td></tr>
+      <tr><td><a href="https://www.bebluesailing.com/en/boat-charter/lagoon-42-nn-rogoznica-marina-frapa-croatia/147835"><b>BeBlue</b></a> <span class="badge b-info">nr 2</span></td><td>2023</td><td>Rogoznica, Frapa</td><td>✔ / ✔</td><td class="r num">8 658 €</td><td>wolny</td><td class="num">580 €</td><td class="num">~1 760 €/tydz.</td></tr>
+      <tr><td><a href="https://12knots.com/en/yacht-charter/lagoon-42-aventus-15968/">„Aventus”</a></td><td>2024</td><td>Split</td><td>✔ / ✔</td><td class="r num">~8 940 €</td><td>wolny</td><td class="num">~730 €</td><td class="num">~1 760 €/tydz.</td></tr>
+      <tr><td><a href="https://www.happycharter.com/en/boat/lagoon-42-c30779?print=1">„Luminor”</a></td><td>2022</td><td>Split</td><td>✔ / ✔</td><td class="r num">~9 650 € <span class="small">(2026)</span></td><td>?</td><td class="num">430 €</td><td class="num">200 €/dzień</td></tr>
+      <tr><td><a href="https://www.happycharter.com/en/boat/lagoon-42-mit-a-c-c28211?print=1">BlueSun „with A/C”</a></td><td>2018</td><td>Trogir</td><td>✔ / ✔</td><td class="r num">~9 350 € <span class="small">(2026)</span></td><td>?</td><td class="num">255 €</td><td class="num">160 €/dzień</td></tr>
+      <tr><td><a href="https://12knots.com/en/yacht-charter/bali-42-4-2-cab-jackpot-39415/">Bali 4.2 „Jackpot”</a> <span class="badge b-warn">bez generatora</span></td><td>2024</td><td>Šibenik</td><td>✔ / ✘</td><td class="r num">~7 950 €</td><td>wolny</td><td class="num">~940 €</td><td>—</td></tr>
     </tbody>
   </table></div>
-
-  <h3 style="margin-top:18px">Koszty dodatkowe katamaranu (tydzień w szczycie)</h3>
-  <div class="grid g2">
-    <div class="tbl"><table class="cost">
-      <tr><th>Pozycja</th><th>Kwota</th></tr>
-      <tr><td>Skipper (7 dni)</td><td>1 850–2 300 €</td></tr>
-      <tr><td>Jedzenie dla skippera (gotujecie dla niego)</td><td>~250 €</td></tr>
-      <tr><td>Sprzątanie końcowe / transit log / pościel</td><td>325–810 €</td></tr>
-      <tr><td>Opłata turystyczna (~1 €/os./dzień)</td><td>~70 €</td></tr>
-      <tr><td>Damage waiver (ubezpieczenie kaucji)</td><td>~420–500 €</td></tr>
-      <tr><td>Paliwo (z generatorem/A/C)</td><td>400–700 €</td></tr>
-      <tr><td>Mariny i boje (5–6 nocy)</td><td>1 100–1 300 €</td></tr>
-      <tr><td>SUP, silnik do pontonu, early check-in</td><td>200–500 €</td></tr>
-      <tr class="sum"><td>Razem z jachtem (Saona 47)</td><td>~16 000–17 000 €</td></tr>
-      <tr class="sum"><td>Razem z jachtem (Lagoon 50)</td><td>~19 000–21 000 €</td></tr>
+  <div class="alert warn"><b>Przed podpisaniem umowy</b> potwierdźcie na piśmie: generator (bez niego klimatyzacja działa tylko w porcie), klimatyzację w forpikach, układ 4+2 i cenę skippera. Rabat za wczesną rezerwację (~10–15%) obowiązuje zwykle do 31.12.2026.</div>
+  <details><summary>Inne jachty w podobnej cenie</summary>
+    <div class="tbl" style="margin-top:8px"><table>
+      <tr><th>Model</th><th>Uwagi</th><th class="r">Lipiec (sam jacht)</th></tr>
+      <tr><td>Lagoon 40 (4+2)</td><td>jak Lagoon 42, trochę ciaśniej</td><td class="r num">7 400–8 500 €</td></tr>
+      <tr><td>FP Astrea 42</td><td>układ kabin trzeba sprawdzić</td><td class="r num">6 000–7 800 €</td></tr>
+      <tr><td>FP Lucia 40</td><td>najtańszy; nie wiadomo, czy ma forpiki</td><td class="r num">5 500–6 500 €</td></tr>
+      <tr><td>Bali 4.4 (6 kabin)</td><td>najwygodniejszy dla 10 osób</td><td class="r num">9 200–11 000 €</td></tr>
+      <tr><td>Nautitech 46 Open</td><td>maks. 9 osób, odpada</td><td class="r num">~6 000 €</td></tr>
     </table></div>
-    <div class="card">
-      <h3>Ceny miejsc dla katamaranu 46–49 ft (za noc, 2026)</h3>
-      <table>
-        <tr><td>ACI Split</td><td class="num">368–408 €</td></tr>
-        <tr><td>ACI Palmižana (Pakleni)</td><td class="num">320–368 €</td></tr>
-        <tr><td>Hvar, nabrzeże miejskie</td><td class="num">264–360 €</td></tr>
-        <tr><td>ACI Korčula</td><td class="num">308–348 €</td></tr>
-        <tr><td>ACI Milna</td><td class="num">296–336 €</td></tr>
-        <tr><td>Komiža, Stari Grad, Bol</td><td class="num">140–150 €</td></tr>
-        <tr><td>Jelsa, Vrboska</td><td class="num">126–135 €</td></tr>
-        <tr><td>Boja prywatna</td><td class="num">45–75 €</td></tr>
-        <tr><td>Kotwica w zatoce</td><td class="num">0 €</td></tr>
-      </table>
-      <p class="small">Katamaran płaci zwykle ~1,5–2× stawki jachtu jednokadłubowego. Najtaniej: 2 noce w marinie, reszta na nabrzeżach miejskich, bojach i kotwicy.</p>
-    </div>
-  </div>
-  <div class="alert info"><b>Rabaty i warunki:</b> early booking zwykle 5–10% (do końca 2026), łącznie do 15%. Płatność: 50% przy rezerwacji, reszta 30–60 dni przed. Anulacja: po rezerwacji przepada 50%, w ostatnich 30 dniach 100% – warto wykupić ubezpieczenie od rezygnacji (~4% wartości). Brokerzy dają 3–4 dni bezpłatnej opcji (hold).</div>
-</section>
-
-<section id="porty">
-  <h2>Porty bazowe i trasy</h2>
-  <div class="tbl"><table>
-    <thead><tr><th>Baza</th><th>Lotnisko</th><th>Dojazd</th><th>Uwagi</th></tr></thead>
-    <tbody>
-      <tr><td><b>Marina Kaštela</b></td><td>Split (SPU)</td><td>7–11 km, ~15 min, taxi ~25 €</td><td><span class="badge b-good">Top</span> Największa flota katamaranów (Lagoon 50/51, Bali 4.8/5.4)</td></tr>
-      <tr><td><b>Marina Trogir / ACI Trogir</b></td><td>Split</td><td>10–15 min</td><td><span class="badge b-good">Top</span> Saona 47 Quintet, starówka UNESCO na kolację</td></tr>
-      <tr><td>Seget – Marina Baotić</td><td>Split</td><td>~15 min</td><td>Navigare, Lagoon, Excess</td></tr>
-      <tr><td>Marina Agana</td><td>Split</td><td>~15 km</td><td>Moorings/Sunsail, Leopard</td></tr>
-      <tr><td>ACI Split</td><td>Split</td><td>30–40 min</td><td>Drogo, korki</td></tr>
-      <tr><td>ACI Dubrownik (Komolac)</td><td>Dubrownik (DBV)</td><td>30–45 min, taxi ~50 €</td><td>Piękna trasa, słabsze połączenia na zaćmienie. Z GDN: Ryanair/Wizz 2×/tydz.</td></tr>
-      <tr><td>Biograd / Sukošan / Pula</td><td>Zadar / Pula</td><td>—</td><td>Nie polecam przy tym planie</td></tr>
-    </tbody>
-  </table></div>
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card">
-      <h3>Trasa ze Splitu/Trogiru (~120–150 Mm) <span class="badge b-good">polecana dla rodziny</span></h3>
-      <ol>
-        <li><b>Sob:</b> start ~17:00 → Šolta / Milna (10–15 Mm)</li>
-        <li><b>Nd:</b> Bol – plaża Zlatni rat → Vrboska/Jelsa</li>
-        <li><b>Pn:</b> Hvar + wyspy Pakleni (Palmižana)</li>
-        <li><b>Wt:</b> → Vis, Komiža (21 Mm), kąpiel na Ždrilcu</li>
-        <li><b>Śr:</b> Biševo – Modra Grota rano (24 € dorośli, dzieci −50%), zatoka Stiniva, Budikovac → Vis</li>
-        <li><b>Czw:</b> → Šolta, Maslinica lub zatoka Šešula</li>
-        <li><b>Pt:</b> Błękitna Laguna (Krknjaši), tankowanie, powrót do bazy</li>
-      </ol>
-    </div>
-    <div class="card">
-      <h3>Trasa z Dubrownika (~110–150 Mm)</h3>
-      <ol>
-        <li><b>Sob:</b> Elafity – Lopud / Šipan</li>
-        <li><b>Nd:</b> Mljet, Polače – park narodowy (dorośli ~28 €, dzieci ~15 €)</li>
-        <li><b>Pn:</b> Korčula – starówka</li>
-        <li><b>Wt:</b> Vela Luka lub Lumbarda</li>
-        <li><b>Śr:</b> Lastovo (opcjonalnie, długi przelot)</li>
-        <li><b>Czw:</b> Mljet, Saplunara</li>
-        <li><b>Pt:</b> Elafity → Dubrownik</li>
-      </ol>
-      <p class="small">Lżejsza wersja: Elafity + Mljet + Korčula, bez Lastova.</p>
-    </div>
-  </div>
-</section>
-
-<section id="zacmienie">
-  <h2>Zaćmienie 2.08.2027 – gdzie i ile trwa</h2>
-  <p class="lead">Najdłuższa całkowitość na świecie (6:23) wypada w okolicach Luksoru. Pas ma ~260 km szerokości i przechodzi przez Hiszpanię, Maroko, Algierię, Tunezję, Libię, Egipt, Arabię Saudyjską i Jemen.</p>
-  <div class="tbl"><table>
-    <thead><tr><th>Miejsce</th><th>Kraj</th><th>Całkowitość</th><th style="min-width:140px"></th><th>Godzina lokalna</th><th>Uwagi</th></tr></thead>
-    <tbody id="eclRows"></tbody>
-  </table></div>
-  <div class="grid g3" style="margin-top:14px">
-    <div class="card"><h3>Pogoda (Jay Anderson, eclipsophile)</h3><p>Egipt: praktycznie zero chmur. Tunezja (Sfax i na płd.): najmniej chmur i pyłu na zachodnim odcinku pasa. Arabia: wybrzeże ~10% chmur, ale ryzyko pyłu; góry Asir mają burze od południa.</p></div>
-    <div class="card"><h3>Bezpieczeństwo oczu</h3><p>Okulary z certyfikatem <b>ISO 12312-2</b> dla każdego (kupić z zapasem). Bez okularów patrzeć można wyłącznie w fazie całkowitej. Aparaty i lornetki potrzebują filtrów słonecznych.</p></div>
-    <div class="card"><h3>Upał</h3><p>Tunezja o 10:00: ~30°C. Egipt i Arabia o 13:00: 36–42°C. Potrzebne nakrycia głowy, parasol lub namiot plażowy, 2–3 l wody na osobę i osłona sprzętu foto.</p></div>
-  </div>
+    <p class="small">Taniej wychodzi w czerwcu (−20–25%) i we wrześniu (−25–35%), ale wtedy nie da się połączyć rejsu z zaćmieniem.</p>
+  </details>
 </section>
 
 <section id="loty">
-  <h2>Loty – kluczowe odcinki</h2>
+  <h2>Loty: najtańsze kombinacje</h2>
+  <div class="alert info">Ryanair i Wizz Air <b>nie latają do Tunezji</b>. Do Tunezji tanio latają Transavia, Nouvelair, Tunisair i easyJet, z przesiadką we Francji albo w Szwajcarii.</div>
   <div class="tbl"><table>
-    <thead><tr><th>Odcinek</th><th>Opcja</th><th>Przewoźnik</th><th>Czas</th><th>Szac. cena/os. (1 str., z bagażem)</th></tr></thead>
+    <thead><tr><th>Odcinek</th><th>Opcja</th><th>Kiedy</th><th class="r">Za os. (z bagażem)</th></tr></thead>
     <tbody>
-      <tr><td>GDN → Split, pt 23.07</td><td>bezpośredni 12:40–14:55 (pon, pt)</td><td>Wizz Air</td><td>2 h 15 min</td><td class="num">500–1 100 zł</td></tr>
-      <tr><td>WAW → Split</td><td>bezpośredni</td><td>LOT, Wizz Air</td><td>2 h 10 min</td><td class="num">500–1 200 zł</td></tr>
-      <tr><td>GDN → Dubrownik</td><td>bezpośredni 2×/tydz.</td><td>Ryanair, Wizz Air</td><td>2 h 10 min</td><td class="num">450–1 000 zł</td></tr>
-      <tr><td>GDN → Zadar, pt</td><td>bezpośredni 09:25–11:30 + 1,5 h autem do Trogiru</td><td>Ryanair</td><td>2 h 05 min</td><td class="num">450–1 000 zł</td></tr>
-      <tr><td>Split → Dżerba, sob 31.07</td><td>przez Paryż-Orly (lub Lyon/Marsylię)</td><td>Transavia, easyJet, Tunisair, Nouvelair</td><td>8–10 h</td><td class="num">1 100–2 200 zł</td></tr>
-      <tr><td>Split → Tunis</td><td>przez Rzym-FCO</td><td>Croatia Airlines/Ryanair + ITA/Tunisair</td><td>6–10 h</td><td class="num">850–1 700 zł</td></tr>
-      <tr><td>Tunis → Dżerba</td><td>lot krajowy 07:00 / 15:00 / 18:30</td><td>Tunisair Express</td><td>1 h</td><td class="num">~250–450 zł</td></tr>
-      <tr><td>Split → Dżudda</td><td>przez Stambuł, przesiadka nocna</td><td>Croatia Airlines + Turkish</td><td>10–14 h</td><td class="num">1 500–3 000 zł</td></tr>
-      <tr><td>Split → Jerez / Sewilla</td><td>przez Barcelonę</td><td>Vueling</td><td>6–8 h</td><td class="num">650–1 500 zł</td></tr>
-      <tr><td>Dżerba → Gdańsk, śr 4.08</td><td>przez Orly + LOT 20:20 (nowa trasa od 04.2027)</td><td>Transavia/Tunisair + LOT</td><td>9–12 h</td><td class="num">1 100–1 900 zł</td></tr>
-      <tr><td>Dżerba → Gdańsk, śr 4.08</td><td>przez Frankfurt</td><td>Discover + Lufthansa</td><td>7–10 h</td><td class="num">1 300–2 300 zł</td></tr>
-      <tr><td>Dżerba → Warszawa, czw 5.08</td><td>czarter seat-only 17:35–21:15</td><td>Rainbow</td><td>2 h 40 min</td><td class="num">700–1 300 zł</td></tr>
-      <tr><td>Enfidha → Warszawa, pn/czw</td><td>czarter seat-only</td><td>Rainbow</td><td>~3 h</td><td class="num">~680–900 zł</td></tr>
-      <tr><td>Monastir → Gdańsk, pn 2.08</td><td>czarter (godziny do potwierdzenia)</td><td>Rainbow / Enter Air</td><td>~3 h</td><td class="num">680–1 300 zł</td></tr>
-      <tr><td>Malaga → Gdańsk, śr 4.08</td><td>bezpośredni (pon, śr, pt)</td><td>Wizz Air / Ryanair</td><td>~4 h</td><td class="num">500–1 200 zł</td></tr>
-      <tr><td>Split → Dżerba prywatnie</td><td>odrzutowiec super-midsize</td><td>czarter</td><td>~2 h</td><td class="num">12–21 tys. zł</td></tr>
+      <tr class="hl"><td>Gdańsk → Chorwacja</td><td>Ryanair Gdańsk–Zadar + FlixBus do Splitu</td><td>pt 09:25–11:30</td><td class="r num">~270–670 zł</td></tr>
+      <tr><td></td><td>Wizz Air Gdańsk–Split</td><td>pt 12:40–14:55</td><td class="r num">~450–950 zł</td></tr>
+      <tr class="hl"><td>Split → Dżerba</td><td>Split–Lyon (easyJet/Volotea) + Lyon–Dżerba (Transavia/Nouvelair)</td><td>sob 31.07</td><td class="r num">~180–330 €</td></tr>
+      <tr><td></td><td>przez Paryż-Orly (Transavia) – także do Sfaksu</td><td>sob 31.07</td><td class="r num">~200–350 €</td></tr>
+      <tr><td></td><td>przez Genewę (easyJet) do Dżerby lub Enfidhy</td><td>sob 31.07</td><td class="r num">~180–330 €</td></tr>
+      <tr class="hl"><td>Dżerba → Polska</td><td>Rainbow, sam przelot, Dżerba–Warszawa</td><td>czw 5.08, 17:35–21:15</td><td class="r num">~900 zł</td></tr>
+      <tr><td></td><td>Rainbow Enfidha–Warszawa/Katowice</td><td>pn / czw</td><td class="r num">~720 zł</td></tr>
+      <tr><td></td><td>Dżerba–Orly + LOT Orly–Gdańsk (szybciej)</td><td>śr 4.08</td><td class="r num">~1 100–1 900 zł</td></tr>
     </tbody>
   </table></div>
-  <div class="alert info"><b>Praktycznie:</b> 9 osób rezerwuje się normalnie online (grupy u Ryanaira od 15, u Wizz Air od 16 osób). Na jacht biorą się tylko miękkie torby – rozsądnie 1 torba 20–23 kg na 2 osoby + bagaż kabinowy. Przy osobnych biletach planujcie przesiadkę ≥3 h z ponownym nadaniem bagażu. Odcinki 31.07–4.08 kupujcie od razu po otwarciu sprzedaży, bo ceny rosną.</div>
+  <p class="small">Bagaż: jedna miękka torba 20 kg na 2 osoby, kupowana od razu przy rezerwacji. Przy osobnych biletach planujcie przesiadkę ≥3 h z ponownym nadaniem bagażu. Rozkłady na lato 2027 nie są jeszcze w pełni opublikowane, dni lotów trzeba potwierdzić. Na niektóre rejsy Rainbow nie ma już 9 wolnych miejsc, więc rezerwujcie całą grupę od razu.</p>
 </section>
 
-<section id="ryzyka">
-  <h2>Ryzyka i formalności</h2>
-  <div class="grid g2">
-    <div class="card"><h3>Tunezja</h3><ul><li>Bez wizy do 90 dni. <b>Paszport</b> dla każdego, także dzieci, ważny min. 3 miesiące od wyjazdu.</li><li>MSZ: Dżerba, Sfax, Gabès, Mahdia, Monastir i El Jem są poza strefami ostrzeżeń. Unikać Kasserine i pasa przy granicy z Libią.</li><li>Opłata turystyczna w hotelu (~3–12 TND/os./noc).</li><li>Na 9 osób trudno o vana – lepiej 2 auta albo bus z kierowcą.</li></ul></div>
-    <div class="card"><h3>Egipt</h3><ul><li>Wiza 30 USD (na lotnisku lub e-wiza). Paszport ważny 6 mies.</li><li>MSZ: poziom 2 dla kraju. Marsa Alam, Hurghada i Luksor są dostępne.</li><li>Kryzys energetyczny 2026 – możliwe ograniczenia.</li></ul></div>
-    <div class="card"><h3>Arabia Saudyjska</h3><ul><li><b>MSZ poziom 4</b> (X 2026). Ataki na lotniska, zawieszone loty.</li><li>E-wiza ~535 SAR/os., zakaz alkoholu, zasady ubioru.</li><li>Mekka zamknięta dla niemuzułmanów.</li></ul></div>
-    <div class="card"><h3>Ogólne</h3><ul><li>Chmury lub pył w dniu zaćmienia – w Tunezji trzymajcie auto w gotowości na przejazd 1–2 h.</li><li>Korki w dniu zaćmienia – oglądajcie blisko noclegu.</li><li>Dzieci podróżujące z jednym rodzicem lub opiekunem – pisemna zgoda drugiego rodzica.</li><li>Ubezpieczenie podróżne i od rezygnacji z czarteru.</li></ul></div>
-  </div>
+<section id="noclegi">
+  <h2>Noclegi budżetowe</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Gdzie</th><th>Co</th><th class="r">Cena</th></tr></thead>
+    <tbody>
+      <tr><td>Kaštela, 23.07</td><td>2 apartamenty po 4–5 osób, blisko lotniska</td><td class="r num">120–200 € za apartament</td></tr>
+      <tr class="hl"><td>Dżerba (Midoun / Houmt Souk)</td><td>willa lub tradycyjny dom (houch) z basenem, 4 sypialnie</td><td class="r num">~135–190 €/noc (2025)</td></tr>
+      <tr><td>Dżerba</td><td>hotel 3★, 3 pokoje rodzinne</td><td class="r num">~110 €/pokój/noc</td></tr>
+      <tr><td>Sfax</td><td>hotel 2–3★ w mieście</td><td class="r num">od 19 €, śr. ~42 €/pokój</td></tr>
+      <tr><td>Mahdia</td><td>hotel 3★</td><td class="r num">~65–145 $/pokój</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">W czasie zaćmienia liczcie dopłatę ×1,5–3. Rezerwujcie teraz z bezpłatnym anulowaniem (Booking, Airbnb).</p>
+</section>
+
+<section id="warianty">
+  <h2>Warianty alternatywne</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Wariant</th><th>Całkowitość</th><th>Za</th><th>Przeciw</th><th>Ocena</th></tr></thead>
+    <tbody>
+      <tr><td><b>Dżerba</b> (plan główny)</td><td class="num">4:43</td><td>zero logistyki w dniu zaćmienia, plaża, tanie wille</td><td>powrót dopiero w czwartek</td><td><span class="badge b-good">polecany</span></td></tr>
+      <tr><td><b>Sfax</b> (Orly → Sfax)</td><td class="num">5:41</td><td>najdłuższe zaćmienie w Tunezji, najmniej chmur, tanie hotele</td><td>miasto przemysłowe, mało lotów</td><td><span class="badge b-info">dla zapalonych</span></td></tr>
+      <tr><td><b>Mahdia + Monastir → Gdańsk</b></td><td class="num">2:49</td><td>możliwy powrót do Gdańska tego samego dnia czarterem Rainbow (pn 2.08)</td><td>krótkie zaćmienie; zależy od godziny wylotu (jeszcze nieznanej)</td><td><span class="badge b-warn">do sprawdzenia</span></td></tr>
+      <tr><td>Egipt (Marsa Alam)</td><td class="num">~6:00</td><td>najdłuższe zaćmienie, pewna pogoda</td><td>brak połączeń ze Splitu, pobyt 7 nocy, hotele ~190 $/noc</td><td><span class="badge b-warn">drożej</span></td></tr>
+      <tr><td>Hiszpania (Kadyks)</td><td class="num">2:56</td><td>krótkie loty</td><td>ceny noclegów ekstremalne, tłumy</td><td><span class="badge b-bad">nie</span></td></tr>
+      <tr><td>Arabia Saudyjska</td><td class="num">5:53</td><td>—</td><td>MSZ poziom 4</td><td><span class="badge b-bad">nie</span></td></tr>
+    </tbody>
+  </table></div>
+  <details><summary>Czas trwania zaćmienia w wybranych miejscach</summary>
+    <div class="tbl" style="margin-top:8px"><table><tbody id="eclRows"></tbody></table></div>
+  </details>
 </section>
 
 <section id="todo">
-  <h2>Co zrobić teraz (październik–listopad 2026)</h2>
-  <ol class="check">
-    <li><b>Katamaran</b> – zapytać 3–4 brokerów (12knots, Boataround, yacht-rent, Navigare, Pitter) o Saona 47 Quintet lub Lagoon 50 w Trogirze/Kašteli na 24–31.07.2027, ze skipperem. Wziąć 3-dniową opcję i zarezerwować przed końcem roku, żeby załapać się na early booking.</li>
-    <li><b>Wybrać scenariusz zaćmienia</b> (A, B lub C) i od razu zarezerwować nocleg 31.07–4.08 z bezpłatnym anulowaniem. Można też zarezerwować równolegle dwa i jeden potem anulować.</li>
-    <li><b>Paszporty</b> – sprawdzić ważność (dzieci!). Musi być ważny min. 6 mies. po powrocie.</li>
-    <li><b>Loty GDN→Split</b> – kupić, gdy Wizz Air otworzy piątek 23.07.2027 (w agregatorach już są daty na 2027).</li>
-    <li><b>Split→Dżerba / Tunis</b> oraz <b>powrót</b> – obserwować sprzedaż (Transavia, Tunisair, LOT ORY–GDN) i kupić od razu po otwarciu.</li>
-    <li>Okulary ISO 12312-2 (12 szt.), filtry do aparatów.</li>
-    <li>Ubezpieczenie: podróżne + od kosztów rezygnacji.</li>
-    <li>Wariant odwrócony – jeśli jacht 24–31.07 nie będzie dostępny: najpierw zaćmienie (31.07–3.08), potem rejs 7–14.08 (Saona „Sunny Wave” i Lagoon 50 w Dubrowniku były wolne w tym terminie).</li>
+  <h2>Do zrobienia teraz</h2>
+  <ol class="todo">
+    <li><b>Jacht</b>: zapytać 12knots o Lagoon 42 „Adventure” (24–31.07.2027), w zapasie BeBlue Rogoznica. Wziąć bezpłatną opcję na 3–4 dni i zarezerwować przed 31.12.2026, żeby załapać się na rabat.</li>
+    <li><b>Willa na Dżerbie</b> 31.07–5.08 z bezpłatnym anulowaniem.</li>
+    <li><b>Paszporty</b> dla wszystkich, ważne min. 6 miesięcy po powrocie.</li>
+    <li><b>Rainbow Dżerba → Warszawa 5.08</b>: zarezerwować 9 miejsc od razu po otwarciu sprzedaży.</li>
+    <li><b>Gdańsk → Zadar/Split</b> oraz <b>Split → Lyon → Dżerba</b>: kupić, gdy pojawią się rozkłady na lato 2027.</li>
+    <li>12 par okularów do zaćmienia z normą ISO 12312-2, ubezpieczenie podróżne i od rezygnacji z czarteru.</li>
   </ol>
 </section>
 
 <section id="zrodla">
-  <h2>Źródła (wybór)</h2>
-  <details><summary>Zaćmienie i pogoda</summary><ul>
-    <li><a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_August_2,_2027">Wikipedia – Solar eclipse of August 2, 2027</a></li>
-    <li><a href="https://eclipsophile.com/tse2027/">Eclipsophile – Jay Anderson, klimatologia 2027</a></li>
-    <li><a href="https://theeclipse.app/2027-total/in/tunisia">theeclipse.app – Tunezja</a></li>
-    <li><a href="https://eclipsewise.com/solar/SEpath/2001-2100/SE2027Aug02Tpath.html">EclipseWise – tabela pasa NASA</a></li>
-    <li><a href="http://xjubier.free.fr/en/site_pages/solar_eclipses/TSE_2027_GoogleMapFull.html">Xavier Jubier – mapa interaktywna</a></li>
-    <li><a href="https://www.space.com/stargazing/solar-eclipses/where-will-the-eclipse-of-the-century-be-visible-on-aug-2-2027">Space.com – Egipt, Marsa Alam</a></li>
+  <h2>Źródła</h2>
+  <details><summary>Jacht</summary><ul>
+    <li><a href="https://12knots.com/de/yacht-charter/lagoon-42-4-2-cab-adventure-64129/">12knots – Lagoon 42 Adventure</a></li>
+    <li><a href="https://www.bebluesailing.com/en/boat-charter/lagoon-42-nn-rogoznica-marina-frapa-croatia/147835">BeBlue – Lagoon 42 Rogoznica</a></li>
+    <li><a href="https://www.yacht-rent.com/croatia-charter/60244-lagoon-42-kaštela">yacht-rent – Lagoon 42 Kaštela</a></li>
+    <li><a href="https://www.sail-croatia.com/resources/mooring-in-croatia">Sail Croatia – ceny miejsc w marinach</a></li>
+    <li><a href="https://silversail.hr/en/skippered-charter-croatia/how-much-does-a-skippered-yacht-charter-in-croatia-cost">Silversail – koszt skippera</a></li>
   </ul></details>
-  <details><summary>Katamarany i mariny</summary><ul>
-    <li><a href="https://12knots.com/en/yacht-charter/fountaine-pajot-saona-47-quintet-5-1-cab-sunny-wave-43584/">Saona 47 Quintet „Sunny Wave” – cennik 2027</a></li>
-    <li><a href="https://12knots.com/en/yacht-charter/lagoon-50-6-1-cab-summer-star-41685-bs-dubrovnik/">Lagoon 50 „Summer Star” Dubrownik</a></li>
-    <li><a href="https://12knots.com/en/yacht-charter/bali-48-basa-8164/">Bali 4.8 „Baša” Kaštela</a></li>
-    <li><a href="https://www.yacht-rent.com/croatia-charter/29673-lagoon-50-kaštela">Lagoon 50 Kaštela (yacht-rent)</a></li>
-    <li><a href="https://www.sail-croatia.com/resources/mooring-in-croatia">Sail Croatia – ceny marin</a></li>
-    <li><a href="https://abavela.com/en/charter-tips-croatia-sailing-route-1.html">Abavela – trasa ze Splitu</a></li>
-    <li><a href="https://www.helm.yt/itinerary/dubrovnik-sailing-holiday">Helm – trasa z Dubrownika</a></li>
+  <details><summary>Loty i noclegi</summary><ul>
+    <li><a href="https://www.infoloty.pl/linie/ryanair/gdansk-zadar-969.html">Ryanair Gdańsk–Zadar</a> · <a href="https://www.flixbus.com/bus-routes/bus-zadar-trogir">FlixBus Zadar–Trogir</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Split_Airport">Split Airport – kierunki</a> · <a href="https://en.wikipedia.org/wiki/Djerba–Zarzis_International_Airport">Djerba Airport – kierunki</a></li>
+    <li><a href="https://www.momondo.fr/vols/lyon/ile-de-djerba">Momondo Lyon–Djerba</a></li>
+    <li><a href="https://r.pl/bilety-czarterowe/tunezja/djerba">Rainbow – bilety czarterowe na Dżerbę</a> · <a href="https://r.pl/bilety-czarterowe/tunezja/enfidha">Enfidha</a> · <a href="https://r.pl/bilety-czarterowe/tunezja/monastyr">Monastir</a></li>
+    <li><a href="https://lapresse.tn/2025/07/04/voici-combien-coutent-les-locations-de-vacances-en-tunisie-cet-ete-2025/">La Presse – ceny wynajmu willi w Tunezji 2025</a></li>
+    <li><a href="https://www.hotelscombined.co.uk/Place/Midoun.htm">HotelsCombined – Midoun</a></li>
   </ul></details>
-  <details><summary>Loty</summary><ul>
-    <li><a href="https://www.infoloty.pl/linie/wizzair/gdansk-split-1104.html">Wizz Air Gdańsk–Split</a></li>
-    <li><a href="https://www.tanie-loty.com.pl/czytelnia/aktualnosci/lot-uruchomi-caloroczne-loty-z-gdanska-do-paryza-orly-pierwszy-rejs-5-kwietnia-2027-roku/">LOT Gdańsk–Paryż Orly od 04.2027</a></li>
-    <li><a href="https://r.pl/bilety-czarterowe/tunezja/djerba">Rainbow – bilety czarterowe Dżerba</a></li>
-    <li><a href="https://r.pl/bilety-czarterowe/tunezja/enfidha">Rainbow – Enfidha</a></li>
-    <li><a href="https://www.itaka.pl/nasze-kierunki/tunezja/loty/">Itaka – loty do Tunezji</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Split_Airport">Split Airport – kierunki</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Djerba–Zarzis_International_Airport">Djerba Airport – kierunki</a></li>
-  </ul></details>
-  <details><summary>Noclegi, bezpieczeństwo, wycieczki</summary><ul>
-    <li><a href="https://www.gov.pl/web/dyplomacja/tunezja">MSZ – Tunezja</a> · <a href="https://www.gov.pl/web/dyplomacja/arabia-saudyjska">MSZ – Arabia Saudyjska</a> · <a href="https://www.gov.pl/web/dyplomacja/egipt">MSZ – Egipt</a></li>
-    <li><a href="https://www.gov.uk/foreign-travel-advice/tunisia/regional-risks">FCDO – Tunezja, regiony</a></li>
-    <li><a href="https://www.easa.europa.eu/conflict-zone-information-bulletin-czibs">EASA – biuletyny stref konfliktu</a></li>
-    <li><a href="https://www.momondo.com/hotels/midoun">Momondo – hotele Midoun</a></li>
-    <li><a href="https://alumni.harvard.edu/travel/trips/2027-eclipse-tunisia">Harvard Alumni – zaćmienie w Sfaksie</a></li>
-    <li><a href="https://www.memphistours.com/saudi-arabia/jeddah-solar-eclipse-2027">Memphis Tours – Dżudda</a></li>
+  <details><summary>Zaćmienie i bezpieczeństwo</summary><ul>
+    <li><a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_August_2,_2027">Wikipedia – zaćmienie 2.08.2027</a> · <a href="https://eclipsophile.com/tse2027/">Eclipsophile – pogoda</a> · <a href="https://theeclipse.app/2027-total/in/tunisia">theeclipse.app – Tunezja</a></li>
+    <li><a href="https://www.gov.pl/web/dyplomacja/tunezja">MSZ – Tunezja</a> · <a href="https://www.gov.pl/web/dyplomacja/arabia-saudyjska">MSZ – Arabia Saudyjska</a></li>
   </ul></details>
 </section>
 </main>
 
-<footer class="wrap">
-  Research wykonany 18.10.2026. Ceny to szacunki na podstawie cenników 2026/2027 i agregatorów – przed rezerwacją potwierdźcie u przewoźników i brokerów. Rozkłady lotów na lato 2027 są częściowo nieopublikowane.
-</footer>
+<footer class="wrap">Research: 18.10.2026. Ceny są szacunkowe i opierają się na cennikach 2026/2027 oraz agregatorach. Przed rezerwacją potwierdźcie je u przewoźników i brokerów.</footer>
 
 <script>
 const ecl=[
- ["Luksor","Egipt",382,"13:02–13:08","najdłuższe na świecie, 42°C, hotele wyprzedane"],
- ["Hamata / Wadi el Gemal","Egipt",380,"~13:11–13:17","na osi, resorty AI"],
- ["Ash Shuaibah (70 km na płd. od Dżuddy)","Arabia Saud.",372,"~13:25–13:31","MSZ poziom 4"],
- ["Dżudda (centrum)","Arabia Saud.",353,"13:22–13:28","MSZ poziom 4"],
- ["Chaffar / Mahrès (płd. od Sfaksu)","Tunezja",344,"~10:09–10:15","maks. w Tunezji, apartamenty"],
- ["Sfax","Tunezja",341,"10:08:54–10:14:35","miasto, ~16 hoteli"],
- ["Kerkennah","Tunezja",341,"~10:09","prom 1 h 15 min"],
- ["Marsa Alam (miasto)","Egipt",330,"~13:10","sprawdź współrzędne hotelu"],
- ["Dżerba (Houmt Souk / Midoun)","Tunezja",283,"10:09:52–10:14:35","kurort, lotnisko DJE"],
- ["El Jem","Tunezja",262,"~10:09","amfiteatr rzymski"],
- ["Gabès","Tunezja",248,"10:08:47–10:12:55",""],
- ["Kadyks","Hiszpania",176,"10:45:29–10:48:25","Słońce nisko, drogo"],
- ["Mahdia","Tunezja",169,"10:10:38–10:13:27","skraj pasa, resorty"],
- ["Monastir / Sousse / Tunis / Hurghada","—",0,"—","POZA pasem – tylko faza częściowa"]
+ ["Luksor (Egipt)",382],["Marsa Alam – południe (Egipt)",370],["Dżudda (Arabia Saud.)",353],
+ ["Sfax / Chaffar (Tunezja)",343],["Dżerba (Tunezja)",283],["El Jem (Tunezja)",262],
+ ["Gabès (Tunezja)",248],["Kadyks (Hiszpania)",176],["Mahdia (Tunezja)",169],["Monastir / Sousse / Hurghada",0]
 ];
-const fmt=s=>s?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):"—";
-document.getElementById("eclRows").innerHTML=ecl.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num"><b>${fmt(r[2])}</b></td><td><div class="bar"><span style="width:${(r[2]/383*100).toFixed(0)}%"></span></div></td><td class="num">${r[3]}</td><td class="small">${r[4]}</td></tr>`).join("");
-
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));
-  document.querySelectorAll(".scen").forEach(s=>s.classList.toggle("active",s.id==="scen-"+b.dataset.s));
-}));
+const fmt=s=>s?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):"poza pasem";
+document.getElementById("eclRows").innerHTML=ecl.map(r=>`<tr><td>${r[0]}</td><td class="num"><b>${fmt(r[1])}</b></td><td style="width:40%"><div class="bar"><span style="width:${(r[1]/383*100).toFixed(0)}%"></span></div></td></tr>`).join("");
 const root=document.documentElement;
 try{const t=localStorage.getItem("theme");if(t)root.dataset.theme=t;}catch(e){}
 document.getElementById("themeBtn").addEventListener("click",()=>{
