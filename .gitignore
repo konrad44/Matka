@@ -72,3 +72,5 @@ desktop.ini
 
 # Claude Code (local settings only — settings.json is committed)
 .claude/settings.local.json
+
+.netlify
