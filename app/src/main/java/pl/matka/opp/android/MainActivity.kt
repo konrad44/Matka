@@ -15,6 +15,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.view.Gravity
 import android.view.View
+import android.view.WindowInsets
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
@@ -54,7 +55,18 @@ class MainActivity : Activity() {
             val p = (16 * d).toInt()
             setPadding(p, p, p, p)
         }
-        setContentView(ScrollView(this).apply { addView(root) })
+        val scroll = ScrollView(this).apply {
+            addView(root)
+            clipToPadding = false
+            // Android 15+ rysuje pod paskami systemowymi – odsuwamy treść.
+            if (Build.VERSION.SDK_INT >= 35) setOnApplyWindowInsetsListener { v, insets ->
+                val typy = WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()
+                val i = insets.getInsets(typy)
+                v.setPadding(i.left, i.top, i.right, i.bottom)
+                insets
+            }
+        }
+        setContentView(scroll)
         if (intent?.action == ACTION_URUCHOM) uruchom()
     }
 

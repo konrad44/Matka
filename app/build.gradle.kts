@@ -13,8 +13,8 @@ android {
         applicationId = "pl.matka.opp"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
     }
 
     // Stały klucz w repo, żeby kolejne APK z CI instalowały się jako aktualizacja
