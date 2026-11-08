@@ -72,3 +72,11 @@ desktop.ini
 
 # Claude Code (local settings only — settings.json is committed)
 .claude/settings.local.json
+
+# Android / Gradle
+.gradle/
+local.properties
+*.apk
+*.aab
+.kotlin/
+captures/

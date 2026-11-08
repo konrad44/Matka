@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <!-- znak ograniczenia prędkości -->
+    <path android:fillColor="#FFD50000"
+        android:pathData="M54,24A30,30 0,1 0,84 54,30 30,0 0,0 54,24Z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M54,31A23,23 0,1 0,77 54,23 23,0 0,0 54,31Z" />
+    <!-- strzałka pomiaru -->
+    <path android:fillColor="#FF212121"
+        android:pathData="M40,57h20v-6l10,9 -10,9v-6h-20z" />
+    <path android:fillColor="#FF212121"
+        android:pathData="M42,44h4v8h-4zM50,40h4v12h-4zM58,44h4v8h-4z" />
+</vector>

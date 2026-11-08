@@ -17,7 +17,7 @@ Kierowca widzi na telefonie małą, przesuwalną wyspę, która:
 
 ## Dane o odcinkach
 
-- Faza 1: stały plik `data/odcinki.json` w repozytorium.
+- Faza 1: stały plik `data/odcinki.json` w repozytorium, wygenerowany z OpenStreetMap (relacje `enforcement=average_speed`, trasy z OSRM) skryptem `tools/2026-11-08-buduj-odcinki.py`.
   - Aplikacja ma wbudowaną kopię (assets) – działa offline od pierwszego uruchomienia.
   - Raz w tygodniu (lub przy pierwszym starcie po upływie 7 dni) pobiera aktualny plik z `raw.githubusercontent.com` i zapisuje lokalnie. Błąd pobierania = zostaje poprzednia wersja.
 - Faza 2: logika po stronie serwera okresowo aktualizująca plik w repo (źródła: GITD/CANARD, OSM). Poza zakresem fazy 1.
@@ -32,8 +32,8 @@ Każdy odcinek jest kierunkowy (dwa kierunki = dwa wpisy).
   "aktualizacja": "2026-11-08",
   "odcinki": [
     {
-      "id": "a1-kowal-sw",
-      "nazwa": "A1 Kowal – Świerzawa (kier. Gdańsk)",
+      "id": "osm-6694778",
+      "nazwa": "19 PNW.O.2.001",
       "droga": "A1",
       "limit": 140,
       "dlugosc_m": 7400,
@@ -56,7 +56,7 @@ Każdy odcinek jest kierunkowy (dwa kierunki = dwa wpisy).
 ## Wykrywanie odcinka
 
 - Pozycja GPS co ~1 s podczas działania usługi.
-- **Zapowiedź**: w odległości ~500 m przed punktem wjazdowym (mierzone po prostej, z kierunkiem jazdy zgodnym z początkiem polilinii) wyspa pokazuje „Za 500 m odcinek, limit X”.
+- **Zapowiedź**: w odległości ≤550 m przed punktem wjazdowym (po prostej), gdy jedziemy w jego stronę (±50°) i w kierunku odcinka (±90°), wyspa pokazuje „za X m”, limit; zdarzenie raz na przejazd.
 - **Wjazd**: przejechanie punktu wjazdowego (rzut pozycji na polilinię przechodzi przez 0 m, kierunek jazdy zgodny z kierunkiem odcinka ±45°). Od tej chwili liczy się czas.
 - **Kierunek**: rozpoznawany po kolejności rzutów na polilinię i kursie GPS. Odcinek przeciwnego kierunku jest ignorowany.
 - **Zjazd**: przejechanie punktu końcowego lub oddalenie się od polilinii o >150 m przez >20 s (zjazd z trasy).
