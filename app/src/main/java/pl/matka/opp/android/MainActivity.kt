@@ -99,8 +99,19 @@ class MainActivity : Activity() {
                 else requestPermissions(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), RC_TLO)
             }
         }
-        uprawnienie("Wyświetlanie nad innymi aplikacjami", Settings.canDrawOverlays(this)) {
+        val nakladka = Settings.canDrawOverlays(this)
+        uprawnienie("Wyświetlanie nad innymi aplikacjami", nakladka) {
             startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
+        }
+        if (!nakladka && Build.VERSION.SDK_INT >= 33) {
+            tekst(
+                "Przełącznik nieaktywny („Aplikacja nie otrzymała dostępu”)? Android blokuje to dla APK spoza sklepu. " +
+                    "Otwórz ustawienia aplikacji → ⋮ (prawy górny róg) → „Zezwalaj na ustawienia z ograniczeniami”, " +
+                    "potem wróć i dotknij „Nadaj”.", 13f,
+            )
+            root.addView(przycisk("Otwórz ustawienia aplikacji") {
+                startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+            })
         }
         if (Build.VERSION.SDK_INT >= 31) {
             uprawnienie("Bluetooth (wykrywanie auta)", ma(Manifest.permission.BLUETOOTH_CONNECT)) {
